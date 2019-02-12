@@ -24,4 +24,19 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         loginButton.makeRoundedCorners()
     }
     
+    // MARK: Actions
+    
+    @IBAction func loginButtonPressed(_ sender: AnyObject) {
+        activityIndicator.startAnimating()
+        enableUIControls(false)
+        
+        
+    }
+    
+    
+    
+    // MARK: Call UIViewController Extension to lock UI Itens
+    private func enableUIControls(_ enable: Bool){
+        self.enableUIItens(views: emailTextField,passwordTextField,loginButton,signUpButton, enable:enable)
+    }
 }
