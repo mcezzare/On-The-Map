@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="width" constant="136" id="eqA-dv-hxW"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="lLu-nm-Am8" userLabel="Stack View Form">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="lLu-nm-Am8" userLabel="Stack View Form">
                                 <rect key="frame" x="30" y="113" width="314" height="240"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lNo-fl-sOm" userLabel="User Email">
@@ -38,7 +38,7 @@
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tzv-Po-p4a" userLabel="User Password">
-                                        <rect key="frame" x="0.0" y="36" width="314" height="30"/>
+                                        <rect key="frame" x="0.0" y="39" width="314" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="EtZ-IK-5F3"/>
                                         </constraints>
@@ -47,7 +47,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z2F-GF-fGt">
-                                        <rect key="frame" x="0.0" y="72" width="314" height="30"/>
+                                        <rect key="frame" x="0.0" y="78" width="314" height="30"/>
                                         <color key="backgroundColor" red="0.0060737514868378639" green="0.5832783579826355" blue="0.74586737155914307" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="u1z-aC-KOx"/>
@@ -56,9 +56,12 @@
                                         <state key="normal" title="LOG IN">
                                             <color key="titleColor" red="0.94104565559999998" green="1" blue="0.95575676620000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XIf-G6-vw7"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ewx-aK-fcA" userLabel="Stack View Text">
-                                        <rect key="frame" x="0.0" y="108" width="314" height="30"/>
+                                        <rect key="frame" x="0.0" y="117" width="314" height="30"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6BP-My-mmv" userLabel="Left View">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -89,13 +92,13 @@
                                         </constraints>
                                     </stackView>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oDG-W8-KWz">
-                                        <rect key="frame" x="0.0" y="144" width="314" height="30"/>
+                                        <rect key="frame" x="0.0" y="156" width="314" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="HV2-4i-TXw"/>
                                         </constraints>
                                     </activityIndicatorView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVZ-vu-Vt0">
-                                        <rect key="frame" x="0.0" y="180" width="314" height="60"/>
+                                        <rect key="frame" x="0.0" y="195" width="314" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>

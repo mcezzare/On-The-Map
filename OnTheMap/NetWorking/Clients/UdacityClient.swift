@@ -10,6 +10,7 @@ import Foundation
 
 /*
  * Constants defined in UdacityConstants.swift
+ * Methods defined in UdacityConvenience.swift
  */
 
 class UdacityClient: NSObject {

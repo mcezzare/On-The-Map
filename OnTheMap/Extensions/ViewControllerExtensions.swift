@@ -24,5 +24,18 @@ extension UIViewController {
             updatesOnScreen()
         }
     }
-
+    
+    // MARK: Show alert dialog
+    func showInfoAlert(theTitle: String = "Info", theMessage: String, action: (() -> Void)? = nil) {
+        performUIUpdatesOnMain {
+            let alertViewControler = UIAlertController(title: theTitle, message: theMessage, preferredStyle: .alert)
+            alertViewControler.addAction(UIAlertAction(title: "OK", style: .default, handler: {(alertAction) in
+                action?()
+            }))
+            self.present(alertViewControler, animated: true)
+        }
+    }
+    
+    
+    
 }
