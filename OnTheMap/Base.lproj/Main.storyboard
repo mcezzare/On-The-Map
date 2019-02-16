@@ -124,11 +124,20 @@
                         <outlet property="loginButton" destination="z2F-GF-fGt" id="3hl-OC-kNd"/>
                         <outlet property="passwordTextField" destination="Tzv-Po-p4a" id="EJm-dz-QAQ"/>
                         <outlet property="signUpButton" destination="Uj2-Et-ukd" id="9dZ-cA-WFM"/>
+                        <segue destination="40w-JI-YnP" kind="showDetail" identifier="showMap" id="SKm-O0-LFB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24.800000000000001" y="31.934032983508249"/>
+            <point key="canvasLocation" x="25" y="54"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="f6A-V5-o82">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Map" storyboardName="Map" id="40w-JI-YnP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="My3-FA-esC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="878" y="53"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="afa-YS-TRx">
@@ -155,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIT-RL-tX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="746" y="32"/>
+            <point key="canvasLocation" x="25" y="699"/>
         </scene>
     </scenes>
     <resources>
