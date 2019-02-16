@@ -78,8 +78,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     // MARK: Send to logged start view
     private func completeLogin() {
+        performSegue(withIdentifier: "showMap", sender: nil)
+        /*
+         When debugging to check if Logged User is stored on shared instance of UdacityClient, will be removed
         let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "secondViewController")
         self.present(navigationManagerController, animated: true, completion: nil)
+        */
     }
     
     
