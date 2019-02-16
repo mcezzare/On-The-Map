@@ -81,6 +81,9 @@
                                                 <rect key="frame" x="171" y="0.0" width="113" height="30"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                 <state key="normal" title="Sign Up"/>
+                                                <connections>
+                                                    <action selector="signUpButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uzd-dp-wzG"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cim-8v-Z88" userLabel="Right View">
                                                 <rect key="frame" x="284" y="0.0" width="30" height="30"/>

@@ -36,6 +36,15 @@ extension UIViewController {
         }
     }
     
+    // MARK: Open external links with Safari
+    func openWithSafari(_ url: String) {
+        guard let url = URL(string: url), UIApplication.shared.canOpenURL(url) else {
+            showInfoAlert(theMessage: "Invalid Url.")
+            return
+        }
+        UIApplication.shared.open(url, options: [:])
+    }
+    
     
     
 }

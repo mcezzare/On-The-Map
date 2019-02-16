@@ -48,17 +48,15 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         self.authenticateUdacityUser(email: email, password: password)
     }
     
+    @IBAction func signUpButtonPressed( sender: AnyObject){
+            openWithSafari(Constants.UdacityUrlSignUp)
+    }
+    
     // MARK:- Functions
     
     private func authenticateUdacityUser(email: String, password: String){
         UdacityClient.sharedInstance().authenticateUser(userEmail: email, userPassword: password) { (success, errorMessage) in
             if success {
-//                self.performUIUpdatesOnMain {
-//                    self.emailTextField.text = ""
-//                    self.passwordTextField.text = ""
-//                    self.showInfoAlert(theTitle: "Login OK", theMessage: "Usuário logado com sucesso.")
-//                }
-                //                self.performSegue(withIdentifier: "showTheMap", sender: nil)
                 self.completeLogin()
             } else {
                 self.performUIUpdatesOnMain {
@@ -83,5 +81,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "secondViewController")
         self.present(navigationManagerController, animated: true, completion: nil)
     }
+    
+    
     
 }
