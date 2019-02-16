@@ -53,10 +53,6 @@ class HTTPCLient : NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
         
-        
-//        showActivityIndicator(true)
-        
-        
         /* 4. Make the request */
         let task = session.dataTask(with: request  as URLRequest) { data, response, error in
             func sendError(_ error: String) {
@@ -98,7 +94,6 @@ class HTTPCLient : NSObject {
                 newData = data.subdata(in: range) /* subset response data! */
             }
             
-//            self.showActivityIndicator(false)
             print(String(data: newData, encoding: .utf8)!)
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
@@ -136,14 +131,8 @@ class HTTPCLient : NSObject {
         
         return components.url!
     }
-    
-    // MARK: Display network activity
-    private func showActivityIndicator(_ show: Bool) {
-        DispatchQueue.main.async {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = show
-        }
-    }
-    
+ 
+   
     // MARK : Helpers
     //        func sendError(_ error: String) {
     //            print(error)

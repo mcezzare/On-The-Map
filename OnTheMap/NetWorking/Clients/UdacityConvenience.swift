@@ -56,27 +56,9 @@ extension UdacityClient {
                 }
                 
         })
-        
-        
-        
     }
     
-    //    private func buildRequestString(userEmail: String, userPassword: String) -> String {
-    //        let credentials = Udacity(username: userEmail, password: userPassword)
-    //        let postData = UdacityRequest(udacity: credentials)
-    //        let encoder = JSONEncoder()
-    //        do{
-    //            let jsonData = try encoder.encode(postData)
-    //            let jsonString = String(data:jsonData, encoding: .utf8)!
-    //            return jsonString
-    //
-    //        }catch{
-    //            print(error.localizedDescription)
-    //        }
-    //
-    //        return "[]"
-    //    }
-    
+
     
     
 }
