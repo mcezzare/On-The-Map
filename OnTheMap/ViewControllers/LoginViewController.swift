@@ -56,9 +56,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 self.performUIUpdatesOnMain {
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
-                    self.showInfoAlert(theTitle: "Login OK", theMessage: "Usuário logado com sucesso.")
+//                    self.showInfoAlert(theTitle: "Login OK", theMessage: "Usuário logado com sucesso.")
                 }
                 //                self.performSegue(withIdentifier: "showTheMap", sender: nil)
+                self.completeLogin()
             } else {
                 self.performUIUpdatesOnMain {
                     self.showInfoAlert(theTitle: "Login falhou", theMessage: "Tente com outras credenciais.")
@@ -75,4 +76,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     private func enableUIControls(_ enable: Bool){
         self.enableUIItens(views: emailTextField,passwordTextField,loginButton,signUpButton, enable:enable)
     }
+    
+    private func completeLogin() {
+        let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "secondViewController")
+        self.present(navigationManagerController, animated: true, completion: nil)
+    }
+    
 }

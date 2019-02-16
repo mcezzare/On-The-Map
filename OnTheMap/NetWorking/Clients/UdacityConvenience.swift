@@ -21,7 +21,7 @@ extension UdacityClient {
         let postData = UdacityRequest(udacity: credentials)
         let encoder = JSONEncoder()
         let jsonBody = try! encoder.encode(postData)
-//        let jsonData = String(data:jsonBody, encoding: .utf8)!
+        //        let jsonData = String(data:jsonBody, encoding: .utf8)!
         
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "POST"
@@ -30,16 +30,20 @@ extension UdacityClient {
         // encoding a JSON body from a string, can also use a Codable struct
         //        request.httpBody = jsonBody.data(using: .utf8) // simple string -> works
         
-//        request.httpBody = jsonBody.data(using: .utf8) // generated string -> works
+        //        request.httpBody = jsonBody.data(using: .utf8) // generated string -> works
         request.httpBody = jsonBody
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error…
-                return
+                completionHandlerForAuth(false,error?.localizedDescription)
+                //                return
+            } else {
+                let range = Range(5..<data!.count)
+                let newData = data?.subdata(in: range) /* subset response data! */
+                print(String(data: newData!, encoding: .utf8)!)
+                completionHandlerForAuth(true,nil)
             }
-            let range = Range(5..<data!.count)
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(String(data: newData!, encoding: .utf8)!)
+            
         }
         task.resume()
         
@@ -61,6 +65,6 @@ extension UdacityClient {
         return "[]"
     }
     
-   
+    
     
 }
