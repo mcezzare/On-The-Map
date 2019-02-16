@@ -73,6 +73,21 @@
             </objects>
             <point key="canvasLocation" x="1894" y="85"/>
         </scene>
+        <!--Pin View Controller-->
+        <scene sceneID="SZX-Ju-hyY">
+            <objects>
+                <viewController id="yx4-7k-K3n" customClass="PinViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PmP-ed-Nzq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="OXd-L9-UFg"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Ht-Nm-8Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2609" y="84"/>
+        </scene>
         <!--Base Tab View Controller-->
         <scene sceneID="Pc4-Fu-A8C">
             <objects>
