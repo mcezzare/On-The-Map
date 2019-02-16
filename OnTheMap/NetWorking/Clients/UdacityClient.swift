@@ -16,8 +16,7 @@ import Foundation
 class UdacityClient: NSObject {
     
     // MARK: Properties
-    var userData: UdacityUser!
-    var userKey: String? = nil
+    var userSession : UserSession!
     
     // MARK: Singleton, Shared Instance
     class func sharedInstance()->UdacityClient{

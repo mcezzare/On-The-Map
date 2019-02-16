@@ -17,28 +17,8 @@ extension UdacityClient {
         let encoder = JSONEncoder()
         let jsonBody = try! encoder.encode(postData)
         let jsonData = String(data:jsonBody, encoding: .utf8)!
-        
-        //        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
-        //        request.httpMethod = "POST"
-        //        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        //        request.httpBody = jsonBody
-        
-        //        let session = URLSession.shared
-        //        let task = session.dataTask(with: request) { data, response, error in
-        //            if error != nil { // Handle error…
-        //                completionHandlerForAuth(false,error?.localizedDescription)
-        //                //                return
-        //            } else {
-        //                let range = Range(5..<data!.count)
-        //                let newData = data?.subdata(in: range) /* subset response data! */
-        //                print(String(data: newData!, encoding: .utf8)!)
-        //                completionHandlerForAuth(true,nil)
-        //            }
-        //
-        //        }
-        //        task.resume()
         let urlPath = UdacityClient.UdacityMethods.Authentication
+        
         _ = HTTPCLient.shared().taskForPostMethod(
             url:urlPath,
             jsonBody:jsonData,
@@ -49,16 +29,26 @@ extension UdacityClient {
                     print(error)
                     completionHandlerForAuth(false, error.localizedDescription)
                 } else {
+                    
                     // work on data result
                     print("Request Worked")
-                    print(data)
-                    completionHandlerForAuth(true, nil)
+                    do {
+                        let userSession = try UserSession(data: data!)
+                        if !userSession.account.registered {
+                            completionHandlerForAuth(false, "Login Failed, user not registered.")
+                        }else {
+                            self.userSession = userSession
+                            completionHandlerForAuth(true, nil)
+                        }
+                    }
+                    catch {
+                        // what kind of error can happen here ?
+                        print("Could not find the looged response itens")
+                        completionHandlerForAuth(false, error.localizedDescription)
+                    }
                 }
-                
         })
     }
-    
-
     
     
 }

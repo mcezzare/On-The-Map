@@ -32,7 +32,7 @@ extension UIViewController {
             alertViewControler.addAction(UIAlertAction(title: "OK", style: .default, handler: {(alertAction) in
                 action?()
             }))
-            self.present(alertViewControler, animated: true)
+            self.present(alertViewControler, animated: true, completion: nil)
         }
     }
     

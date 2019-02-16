@@ -16,9 +16,9 @@ class HTTPCLient : NSObject {
     var session = URLSession.shared
     
     // authentication state
-    var sessionID: String? = nil
-    var userKey = ""
-    var userName = ""
+//    var sessionID: String? = nil
+//    var userKey = ""
+//    var userName = ""
     
     
     // MARK: Initializers
@@ -35,16 +35,18 @@ class HTTPCLient : NSObject {
         return Singleton.shared
     }
     
+    // MARK : Method to make post requests
     func taskForPostMethod(
-        url urlPath           : String,
-        jsonBody                : String,
-        parameters               : [String:AnyObject],
-        //        headers httpHeaders     : [String:String]?,
-        apiType                 : APIType = .udacity,
-        completionHandlerForPost: @escaping (_ result: Data?, _ error: NSError?) -> Void ) -> URLSessionDataTask {
+        url urlPath                         : String,
+        jsonBody                            : String,
+        parameters                          : [String:AnyObject],
+        requestHeaderParameters httpHeaders : [String:String]? = nil,
+        apiType                             : APIType = .udacity,
+        completionHandlerForPost            : @escaping (_ result: Data?, _ error: NSError?) -> Void ) -> URLSessionDataTask {
         
         /* 1. Set the parameters */
         let urlString = self.buildURLFromParameters(parameters,withPathExtension:urlPath,apiType: apiType)
+        
         
         /* 2/3. Build the URL, Configure the request */
         var request = NSMutableURLRequest(url: urlString)
@@ -52,6 +54,13 @@ class HTTPCLient : NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
+
+        
+        if let headersParam = httpHeaders {
+            for (key,value) in httpHeaders! {
+                request.addValue("\(value)", forHTTPHeaderField: key)
+            }
+        }
         
         /* 4. Make the request */
         let task = session.dataTask(with: request  as URLRequest) { data, response, error in
@@ -87,7 +96,7 @@ class HTTPCLient : NSObject {
                 return
             }
             
-            // skipping the first 5 characters for Udacity API calls
+            // Skipping the first 5 characters for Udacity API calls
             var newData = data
             if apiType == .udacity {
                 let range = Range(5..<data.count)
@@ -131,13 +140,5 @@ class HTTPCLient : NSObject {
         
         return components.url!
     }
- 
    
-    // MARK : Helpers
-    //        func sendError(_ error: String) {
-    //            print(error)
-    //            let userInfo = [NSLocalizedDescriptionKey : error]
-    //            completionHandlerForPost(nil, NSError(domain: "taskForPostMethod", code: 1, userInfo: userInfo))
-    //        }
-    
 }
