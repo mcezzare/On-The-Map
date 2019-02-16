@@ -32,14 +32,14 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         enableUIControls(false)
         
         guard let email = emailTextField.text, !email.isEmpty else {
-            activityIndicator.startAnimating()
+            activityIndicator.stopAnimating()
             enableUIControls(true)
             showInfoAlert(theTitle: "Campo obrigatório" , theMessage: "Preencha o campo email." )
             return
         }
         
         guard let password = passwordTextField.text, !password.isEmpty else {
-            activityIndicator.startAnimating()
+            activityIndicator.stopAnimating()
             enableUIControls(true)
             showInfoAlert(theTitle: "Campo obrigatório" , theMessage: "Preencha o campo senha." )
             return
@@ -48,17 +48,16 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         self.authenticateUdacityUser(email: email, password: password)
     }
     
+    @IBAction func signUpButtonPressed( sender: AnyObject){
+            openWithSafari(Constants.UdacityUrlSignUp)
+    }
+    
     // MARK:- Functions
     
     private func authenticateUdacityUser(email: String, password: String){
         UdacityClient.sharedInstance().authenticateUser(userEmail: email, userPassword: password) { (success, errorMessage) in
             if success {
-                self.performUIUpdatesOnMain {
-                    self.emailTextField.text = ""
-                    self.passwordTextField.text = ""
-                    self.showInfoAlert(theTitle: "Login OK", theMessage: "Usuário logado com sucesso.")
-                }
-                //                self.performSegue(withIdentifier: "showTheMap", sender: nil)
+                self.completeLogin()
             } else {
                 self.performUIUpdatesOnMain {
                     self.showInfoAlert(theTitle: "Login falhou", theMessage: "Tente com outras credenciais.")
@@ -66,8 +65,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             }
             self.performUIUpdatesOnMain {
                 self.activityIndicator.stopAnimating()
+                self.enableUIControls(true)
             }
-            self.enableUIControls(true)
+            
         }
     }
     
@@ -75,4 +75,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     private func enableUIControls(_ enable: Bool){
         self.enableUIItens(views: emailTextField,passwordTextField,loginButton,signUpButton, enable:enable)
     }
+    
+    // MARK: Send to logged start view
+    private func completeLogin() {
+        let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "secondViewController")
+        self.present(navigationManagerController, animated: true, completion: nil)
+    }
+    
+    
+    
 }

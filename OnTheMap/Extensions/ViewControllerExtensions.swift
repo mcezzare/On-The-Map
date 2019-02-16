@@ -32,8 +32,17 @@ extension UIViewController {
             alertViewControler.addAction(UIAlertAction(title: "OK", style: .default, handler: {(alertAction) in
                 action?()
             }))
-            self.present(alertViewControler, animated: true)
+            self.present(alertViewControler, animated: true, completion: nil)
         }
+    }
+    
+    // MARK: Open external links with Safari
+    func openWithSafari(_ url: String) {
+        guard let url = URL(string: url), UIApplication.shared.canOpenURL(url) else {
+            showInfoAlert(theMessage: "Invalid Url.")
+            return
+        }
+        UIApplication.shared.open(url, options: [:])
     }
     
     
