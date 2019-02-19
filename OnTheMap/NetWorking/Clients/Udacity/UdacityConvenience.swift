@@ -31,7 +31,7 @@ extension UdacityClient {
                 } else {
                     
                     // work on data result
-                    print("Request Worked")
+                    // print("Request Worked")
                     do {
                         let userSession = try UserSession(data: data!)
                         if !userSession.account.registered {
@@ -43,7 +43,7 @@ extension UdacityClient {
                     }
                     catch {
                         // what kind of error can happen here ?
-                        print("Could not find the looged response itens")
+                        print("Could not find the logged response itens")
                         completionHandlerForAuth(false, error.localizedDescription)
                     }
                 }
