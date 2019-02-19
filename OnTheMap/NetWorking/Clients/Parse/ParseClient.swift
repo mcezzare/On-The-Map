@@ -16,7 +16,7 @@ import Foundation
 class ParseClient: NSObject {
     
     // MARK: Properties
-    var userSession : UserSession!
+    
     
     // MARK: Singleton, Shared Instance
     class func sharedInstance()->ParseClient{

@@ -17,6 +17,8 @@ class UdacityClient: NSObject {
     
     // MARK: Properties
     var userSession : UserSession!
+    var udacityUser : UdacityUser!
+    
     
     // MARK: Singleton, Shared Instance
     class func sharedInstance()->UdacityClient{

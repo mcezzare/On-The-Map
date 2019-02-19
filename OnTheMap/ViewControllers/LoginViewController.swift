@@ -48,8 +48,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         self.authenticateUdacityUser(email: email, password: password)
     }
     
+    /// Send guest to SignUP webSite
     @IBAction func signUpButtonPressed( sender: AnyObject){
-            openWithSafari(Constants.UdacityUrlSignUp)
+        openWithSafari(Constants.UdacityUrlSignUp)
     }
     
     // MARK:- Functions
@@ -77,15 +78,25 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     }
     
     // MARK: Send to logged start view
+    
+    /// Send to logged start view
     private func completeLogin() {
+        
+        UdacityClient.sharedInstance().getStudentInfo(completionHandler: { (studentInfo, error) in
+            if let error = error {
+                self.showInfoAlert(theTitle: "Error" , theMessage: error)
+                return
+            } else {
+                print(studentInfo) // TODO: something
+            }
+        })
+        
         performSegue(withIdentifier: "showMap", sender: nil)
         /*
          When debugging to check if Logged User is stored on shared instance of UdacityClient, will be removed
-        let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "secondViewController")
-        self.present(navigationManagerController, animated: true, completion: nil)
-        */
+         let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "secondViewController")
+         self.present(navigationManagerController, animated: true, completion: nil)
+         */
     }
-    
-    
     
 }

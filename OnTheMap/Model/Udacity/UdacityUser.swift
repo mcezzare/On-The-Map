@@ -5,11 +5,23 @@
 //  Created by Mario Cezzare on 12/02/19.
 //  Copyright © 2019 Mario Cezzare. All rights reserved.
 //
+// To parse the JSON, add this file to your project and do:
+//
+//   let udacityUser = try UdacityUser(json)
+//
+// To read values from URLs:
+//
+//   let task = URLSession.shared.udacityUserTask(with: url) { udacityUser, response, error in
+//     if let udacityUser = udacityUser {
+//       ...
+//     }
+//   }
+//   task.resume()
 
 import Foundation
 
 struct UdacityUser: Codable {
-    let purpleGuard, emailPreferences: EmailPreferences
+    let udacityUserGuard, emailPreferences: EmailPreferences
     let cohortKeys: [JSONAny]
     let nickname: String
     let memberships: [JSONAny]
@@ -23,7 +35,7 @@ struct UdacityUser: Codable {
     let badges, externalAccounts, socialAccounts: [JSONAny]
     
     enum CodingKeys: String, CodingKey {
-        case purpleGuard = "guard"
+        case udacityUserGuard = "guard"
         case emailPreferences = "email_preferences"
         case cohortKeys = "_cohort_keys"
         case nickname
@@ -60,92 +72,159 @@ struct Email: Codable {
 struct EmailPreferences: Codable {
 }
 
-// MARK: Convenience initializers
+// MARK: Convenience initializers and mutators
 
 extension UdacityUser {
-    init?(data: Data) {
-        guard let me = try? JSONDecoder().decode(UdacityUser.self, from: data) else { return nil }
-        self = me
+    init(data: Data) throws {
+        self = try newJSONDecoder().decode(UdacityUser.self, from: data)
     }
     
-    init?(_ json: String, using encoding: String.Encoding = .utf8) {
-        guard let data = json.data(using: encoding) else { return nil }
-        self.init(data: data)
+    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
+        guard let data = json.data(using: encoding) else {
+            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
+        }
+        try self.init(data: data)
     }
     
-    init?(fromURL url: String) {
-        guard let url = URL(string: url) else { return nil }
-        guard let data = try? Data(contentsOf: url) else { return nil }
-        self.init(data: data)
+    init(fromURL url: URL) throws {
+        try self.init(data: try Data(contentsOf: url))
     }
     
-    var jsonData: Data? {
-        return try? JSONEncoder().encode(self)
+    func with(
+        udacityUserGuard: EmailPreferences? = nil,
+        emailPreferences: EmailPreferences? = nil,
+        cohortKeys: [JSONAny]? = nil,
+        nickname: String? = nil,
+        memberships: [JSONAny]? = nil,
+        registered: Bool? = nil,
+        affiliateProfiles: [JSONAny]? = nil,
+        tags: [JSONAny]? = nil,
+        hasPassword: Bool? = nil,
+        employerSharing: Bool? = nil,
+        email: Email? = nil,
+        firstName: String? = nil,
+        key: String? = nil,
+        lastName: String? = nil,
+        enrollments: [JSONAny]? = nil,
+        principals: [JSONAny]? = nil,
+        imageURL: String? = nil,
+        badges: [JSONAny]? = nil,
+        externalAccounts: [JSONAny]? = nil,
+        socialAccounts: [JSONAny]? = nil
+        ) -> UdacityUser {
+        return UdacityUser(
+            udacityUserGuard: udacityUserGuard ?? self.udacityUserGuard,
+            emailPreferences: emailPreferences ?? self.emailPreferences,
+            cohortKeys: cohortKeys ?? self.cohortKeys,
+            nickname: nickname ?? self.nickname,
+            memberships: memberships ?? self.memberships,
+            registered: registered ?? self.registered,
+            affiliateProfiles: affiliateProfiles ?? self.affiliateProfiles,
+            tags: tags ?? self.tags,
+            hasPassword: hasPassword ?? self.hasPassword,
+            employerSharing: employerSharing ?? self.employerSharing,
+            email: email ?? self.email,
+            firstName: firstName ?? self.firstName,
+            key: key ?? self.key,
+            lastName: lastName ?? self.lastName,
+            enrollments: enrollments ?? self.enrollments,
+            principals: principals ?? self.principals,
+            imageURL: imageURL ?? self.imageURL,
+            badges: badges ?? self.badges,
+            externalAccounts: externalAccounts ?? self.externalAccounts,
+            socialAccounts: socialAccounts ?? self.socialAccounts
+        )
     }
     
-    var json: String? {
-        guard let data = self.jsonData else { return nil }
-        return String(data: data, encoding: .utf8)
+    func jsonData() throws -> Data {
+        return try newJSONEncoder().encode(self)
+    }
+    
+    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
+        return String(data: try self.jsonData(), encoding: encoding)
     }
 }
 
 extension Email {
-    init?(data: Data) {
-        guard let me = try? JSONDecoder().decode(Email.self, from: data) else { return nil }
-        self = me
+    init(data: Data) throws {
+        self = try newJSONDecoder().decode(Email.self, from: data)
     }
     
-    init?(_ json: String, using encoding: String.Encoding = .utf8) {
-        guard let data = json.data(using: encoding) else { return nil }
-        self.init(data: data)
+    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
+        guard let data = json.data(using: encoding) else {
+            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
+        }
+        try self.init(data: data)
     }
     
-    init?(fromURL url: String) {
-        guard let url = URL(string: url) else { return nil }
-        guard let data = try? Data(contentsOf: url) else { return nil }
-        self.init(data: data)
+    init(fromURL url: URL) throws {
+        try self.init(data: try Data(contentsOf: url))
     }
     
-    var jsonData: Data? {
-        return try? JSONEncoder().encode(self)
+    func with(
+        verificationCodeSent: Bool? = nil,
+        verified: Bool? = nil,
+        address: String? = nil
+        ) -> Email {
+        return Email(
+            verificationCodeSent: verificationCodeSent ?? self.verificationCodeSent,
+            verified: verified ?? self.verified,
+            address: address ?? self.address
+        )
     }
     
-    var json: String? {
-        guard let data = self.jsonData else { return nil }
-        return String(data: data, encoding: .utf8)
+    func jsonData() throws -> Data {
+        return try newJSONEncoder().encode(self)
+    }
+    
+    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
+        return String(data: try self.jsonData(), encoding: encoding)
     }
 }
 
 extension EmailPreferences {
-    init?(data: Data) {
-        guard let me = try? JSONDecoder().decode(EmailPreferences.self, from: data) else { return nil }
-        self = me
+    init(data: Data) throws {
+        self = try newJSONDecoder().decode(EmailPreferences.self, from: data)
     }
     
-    init?(_ json: String, using encoding: String.Encoding = .utf8) {
-        guard let data = json.data(using: encoding) else { return nil }
-        self.init(data: data)
+    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
+        guard let data = json.data(using: encoding) else {
+            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
+        }
+        try self.init(data: data)
     }
     
-    init?(fromURL url: String) {
-        guard let url = URL(string: url) else { return nil }
-        guard let data = try? Data(contentsOf: url) else { return nil }
-        self.init(data: data)
+    init(fromURL url: URL) throws {
+        try self.init(data: try Data(contentsOf: url))
     }
     
-    var jsonData: Data? {
-        return try? JSONEncoder().encode(self)
+    func with(
+        ) -> EmailPreferences {
+        return EmailPreferences(
+        )
     }
     
-    var json: String? {
-        guard let data = self.jsonData else { return nil }
-        return String(data: data, encoding: .utf8)
+    func jsonData() throws -> Data {
+        return try newJSONEncoder().encode(self)
+    }
+    
+    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
+        return String(data: try self.jsonData(), encoding: encoding)
     }
 }
 
 // MARK: Encode/decode helpers
 
-class JSONNull: Codable {
+class JSONNull: Codable, Hashable {
+    
+    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
+        return true
+    }
+    
+    public var hashValue: Int {
+        return 0
+    }
+    
     public init() {}
     
     public required init(from decoder: Decoder) throws {
@@ -182,7 +261,7 @@ class JSONCodingKey: CodingKey {
 }
 
 class JSONAny: Codable {
-    public let value: Any
+    let value: Any
     
     static func decodingError(forCodingPath codingPath: [CodingKey]) -> DecodingError {
         let context = DecodingError.Context(codingPath: codingPath, debugDescription: "Cannot decode JSONAny")
@@ -374,3 +453,38 @@ class JSONAny: Codable {
         }
     }
 }
+
+fileprivate func newJSONDecoder() -> JSONDecoder {
+    let decoder = JSONDecoder()
+    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+        decoder.dateDecodingStrategy = .iso8601
+    }
+    return decoder
+}
+
+fileprivate func newJSONEncoder() -> JSONEncoder {
+    let encoder = JSONEncoder()
+    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+        encoder.dateEncodingStrategy = .iso8601
+    }
+    return encoder
+}
+
+// MARK: - URLSession response handlers
+
+//extension URLSession {
+//    fileprivate func codableTask<T: Codable>(with url: URL, completionHandler: @escaping (T?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+//        return self.dataTask(with: url) { data, response, error in
+//            guard let data = data, error == nil else {
+//                completionHandler(nil, response, error)
+//                return
+//            }
+//            completionHandler(try? newJSONDecoder().decode(T.self, from: data), response, nil)
+//        }
+//    }
+//    
+//    func udacityUserTask(with url: URL, completionHandler: @escaping (UdacityUser?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+//        return self.codableTask(with: url, completionHandler: completionHandler)
+//    }
+//}
+//

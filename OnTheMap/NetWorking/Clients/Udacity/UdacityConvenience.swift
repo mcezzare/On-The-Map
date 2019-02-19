@@ -50,5 +50,33 @@ extension UdacityClient {
         })
     }
     
+    // MARK : Get info about Student after login
+    func getStudentInfo(completionHandler: @escaping(_ result:UdacityUser?, _ error:String?) -> Void){
+        
+        let urlPath = UdacityClient.UdacityMethods.Users + "/" + self.userSession.account.key
+        
+        _ = HTTPCLient.shared().taskForGetMethod(
+            url: urlPath,
+            parameters: [:],
+            completionHandlerForGet: { (data,error) in
+                if let error = error {
+                    print(error)
+                    completionHandler(nil,error.localizedDescription)
+                } else {
+                    do{
+                        let udacityUser = try UdacityUser(data: data!)
+                        self.udacityUser = udacityUser
+                        completionHandler(udacityUser,nil)
+                    }
+                    catch{
+                        print("Could not read user details")
+                        completionHandler(nil, "Could not read user details")
+                    }
+                }
+        }
+        )
+        
+    }
+    
     
 }
