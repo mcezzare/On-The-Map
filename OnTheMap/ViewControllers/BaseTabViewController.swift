@@ -11,6 +11,12 @@ import UIKit
 
 class BaseTabViewController : UITabBarController {
     
+    // MARK: Outlets
+    
+    @IBOutlet weak var postLocationButton : UIBarButtonItem!
+    @IBOutlet weak var reloadStudentsLocationsButton : UIBarButtonItem!
+    @IBOutlet weak var logOutButton : UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

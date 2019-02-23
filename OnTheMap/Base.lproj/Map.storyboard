@@ -291,6 +291,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="logOutButton" destination="uWf-mJ-cSe" id="VyL-EY-3Tc"/>
+                        <outlet property="postLocationButton" destination="ZI6-FU-RTr" id="YsH-pg-i49"/>
+                        <outlet property="reloadStudentsLocationsButton" destination="e2n-Gn-vVP" id="udE-QT-Pek"/>
                         <segue destination="mLM-OW-CcY" kind="relationship" relationship="viewControllers" id="dfJ-q3-L6c"/>
                         <segue destination="b03-mH-Uop" kind="relationship" relationship="viewControllers" id="a4k-Kc-Esb"/>
                     </connections>
