@@ -16,7 +16,7 @@ import Foundation
 class ParseClient: NSObject {
     
     // MARK: Properties
-    
+//    var studentsLocation : StudentsLocation!
     
     // MARK: Singleton, Shared Instance
     class func sharedInstance()->ParseClient{

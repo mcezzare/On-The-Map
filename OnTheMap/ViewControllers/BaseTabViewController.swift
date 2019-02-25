@@ -36,12 +36,17 @@ class BaseTabViewController : UITabBarController {
     // MARK : Load students locations from Parse API
     @objc private func loadStudentsInformation(){
         NotificationCenter.default.post(name: .reloadStarted, object: nil)
-        ParseClient.sharedInstance().getStudentsLocation(){ (studentsLocation, errorMessage) in
-            if errorMessage != nil {
-                print(errorMessage?.localizedDescription)
-            } else {
-                print("From  basetabviewcontroller \(studentsLocation)")
+        ParseClient.sharedInstance().getStudentsLocation(){ (studentsLocation, error) in
+            if let error = error {
+                self.showInfoAlert(theTitle: "Erro" , theMessage: error.localizedDescription)
+                NotificationCenter.default.post(name: .reloadCompleted , object: nil)
+                return
             }
+            if let studentsLocation = studentsLocation {
+                StudentsLocation.shared.studentsInformation = studentsLocation
+            }
+            NotificationCenter.default.post(name: .reloadCompleted , object: nil)
+            // Show must go on on MapViewController
         }
     }
     

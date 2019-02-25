@@ -145,6 +145,10 @@
                         <viewLayoutGuide key="safeArea" id="28w-bF-aOh"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" selectedImage="icon_mapview-selected" id="8W8-W5-tQU"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="uBU-6z-T7f" id="UEU-Ek-g8g"/>
+                        <outlet property="mapView" destination="NWy-uR-Rre" id="R2i-uv-ara"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gl1-1D-ek5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -223,7 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPU-ds-XHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="258" y="1208"/>
+            <point key="canvasLocation" x="257" y="1279"/>
         </scene>
         <!--Pin View Controller-->
         <scene sceneID="SZX-Ju-hyY">
@@ -234,7 +238,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8mB-b8-o3t">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tes-l8-cdA">
                                 <rect key="frame" x="30" y="532" width="315" height="30"/>
@@ -255,10 +259,10 @@
                         <constraints>
                             <constraint firstItem="OXd-L9-UFg" firstAttribute="trailing" secondItem="tes-l8-cdA" secondAttribute="trailing" constant="30" id="2xW-aA-0HH"/>
                             <constraint firstItem="r3V-lJ-awn" firstAttribute="centerX" secondItem="OXd-L9-UFg" secondAttribute="centerX" id="8Wg-J4-XIS"/>
-                            <constraint firstItem="8mB-b8-o3t" firstAttribute="leading" secondItem="OXd-L9-UFg" secondAttribute="leading" id="CGJ-jU-pE3"/>
+                            <constraint firstItem="8mB-b8-o3t" firstAttribute="leading" secondItem="PmP-ed-Nzq" secondAttribute="leadingMargin" id="CGJ-jU-pE3"/>
                             <constraint firstItem="tes-l8-cdA" firstAttribute="leading" secondItem="OXd-L9-UFg" secondAttribute="leading" constant="30" id="Olg-ou-UsR"/>
                             <constraint firstItem="OXd-L9-UFg" firstAttribute="bottom" secondItem="tes-l8-cdA" secondAttribute="bottom" constant="105" id="YpL-cJ-kQV"/>
-                            <constraint firstItem="OXd-L9-UFg" firstAttribute="trailing" secondItem="8mB-b8-o3t" secondAttribute="trailing" id="Zcl-5M-1ui"/>
+                            <constraint firstItem="8mB-b8-o3t" firstAttribute="trailing" secondItem="PmP-ed-Nzq" secondAttribute="trailingMargin" id="Zcl-5M-1ui"/>
                             <constraint firstItem="OXd-L9-UFg" firstAttribute="bottom" secondItem="8mB-b8-o3t" secondAttribute="bottom" id="auC-gi-VeD"/>
                             <constraint firstItem="8mB-b8-o3t" firstAttribute="top" secondItem="OXd-L9-UFg" secondAttribute="top" id="dGZ-la-lwe"/>
                             <constraint firstItem="r3V-lJ-awn" firstAttribute="centerY" secondItem="OXd-L9-UFg" secondAttribute="centerY" id="jNd-DW-ewa"/>
@@ -268,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ht-Nm-8Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="716" y="1208"/>
+            <point key="canvasLocation" x="990" y="1279"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="Pc4-Fu-A8C">
@@ -282,7 +286,11 @@
                                     <segue destination="sBT-Ix-nNa" kind="show" id="Trp-2X-g7f"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="e2n-Gn-vVP" userLabel="ReloadButton"/>
+                            <barButtonItem systemItem="refresh" id="e2n-Gn-vVP" userLabel="ReloadButton">
+                                <connections>
+                                    <action selector="reload:" destination="MGr-nL-cYw" id="mvE-od-HGA"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="apX-oz-EZ5">

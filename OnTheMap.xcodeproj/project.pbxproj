@@ -12,6 +12,7 @@
 		2526D64B2221F14800E4177C /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526D64A2221F14800E4177C /* StudentInformation.swift */; };
 		2526D64D2221F76900E4177C /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526D64C2221F76900E4177C /* ParseConvenience.swift */; };
 		2526D64F22233B9600E4177C /* StudentsLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526D64E22233B9600E4177C /* StudentsLocation.swift */; };
+		2526D6512223AB3300E4177C /* BaseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526D6502223AB3300E4177C /* BaseMapViewController.swift */; };
 		252EA7AA221263770027D01F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7A9221263770027D01F /* LoginViewController.swift */; };
 		252EA7AD221266F50027D01F /* UiViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7AC221266F50027D01F /* UiViewExtensions.swift */; };
 		252EA7AF22126D2B0027D01F /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7AE22126D2B0027D01F /* ViewControllerExtensions.swift */; };
@@ -62,6 +63,7 @@
 		2526D64A2221F14800E4177C /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		2526D64C2221F76900E4177C /* ParseConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
 		2526D64E22233B9600E4177C /* StudentsLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsLocation.swift; sourceTree = "<group>"; };
+		2526D6502223AB3300E4177C /* BaseMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMapViewController.swift; sourceTree = "<group>"; };
 		252EA7A9221263770027D01F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		252EA7AC221266F50027D01F /* UiViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiViewExtensions.swift; sourceTree = "<group>"; };
 		252EA7AE22126D2B0027D01F /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				259D24012218A54700544CE2 /* PostViewController.swift */,
 				259D24032218A99700544CE2 /* BaseTabViewController.swift */,
 				259D24052218B74700544CE2 /* PinViewController.swift */,
+				2526D6502223AB3300E4177C /* BaseMapViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				252EA7AD221266F50027D01F /* UiViewExtensions.swift in Sources */,
 				252EA7BE2213BB6C0027D01F /* UdacityRequest.swift in Sources */,
 				259D23FE2218A46700544CE2 /* MapViewController.swift in Sources */,
+				2526D6512223AB3300E4177C /* BaseMapViewController.swift in Sources */,
 				2509B25A221BA7560095F6AD /* ParseConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

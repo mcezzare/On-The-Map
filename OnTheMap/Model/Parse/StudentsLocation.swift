@@ -12,6 +12,7 @@ struct StudentsLocation {
     
     static var shared = StudentsLocation()
     
+    // Required
     private init(){}
     
     var studentsInformation = [StudentInformation]()

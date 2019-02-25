@@ -9,6 +9,8 @@
 import Foundation
 
 extension UdacityClient {
+    
+    
     func authenticateUser(userEmail: String, userPassword: String, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
         // Build Json body of request
