@@ -9,8 +9,8 @@
 import Foundation
 
 /*
- * Constants defined in UdacityConstants.swift
- * Methods defined in UdacityConvenience.swift
+ * Constants defined in ParseConstants.swift
+ * Methods defined in ParseConvenience.swift
  */
 
 class ParseClient: NSObject {

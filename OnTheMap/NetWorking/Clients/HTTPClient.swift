@@ -20,6 +20,8 @@ class HTTPCLient : NSObject {
     //    var userKey = ""
     //    var userName = ""
     
+    // MARK : Access the debug on delegate property
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // MARK: Initializers
     override init() {
@@ -140,6 +142,11 @@ class HTTPCLient : NSObject {
             }
         }
         
+        if appDelegate.DEBUG {
+            print("DEBUG INFO")
+            print(request.allHTTPHeaderFields!)
+        }
+        
         /* 4. Make the request */
         let task = session.dataTask(with: request  as URLRequest) { data, response, error in
             func sendError(_ error: String) {
@@ -205,9 +212,9 @@ class HTTPCLient : NSObject {
     private func buildURLFromParameters(_ parameters: [String:AnyObject], withPathExtension: String? = nil, apiType: APIType = .udacity) -> URL {
         
         var components = URLComponents()
-        components.scheme = apiType == .udacity ? UdacityClient.UdacityService.APIScheme : "" // Constants.Parse.APIScheme
-        components.host = apiType == .udacity ? UdacityClient.UdacityService.APIHost : "" // Constants.Parse.APIHost
-        components.path = (apiType == .udacity ? UdacityClient.UdacityService.APIPath : "" /*Constants.Parse.APIPath*/) + (withPathExtension ?? "")
+        components.scheme = apiType == .udacity ? UdacityClient.UdacityService.APIScheme : ParseClient.ParseService.APIScheme
+        components.host = apiType == .udacity ? UdacityClient.UdacityService.APIHost : ParseClient.ParseService.APIHost
+        components.path = (apiType == .udacity ? UdacityClient.UdacityService.APIPath : ParseClient.ParseService.APIPath) + (withPathExtension ?? "")
         components.queryItems = [URLQueryItem]()
         
         for (key, value) in parameters {

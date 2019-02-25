@@ -20,10 +20,10 @@ extension ParseClient {
         static let StudentLocation = "/classes/StudentLocation"
     }
     
-    // wil be replaced by codable structs
-//    struct ParseJSONResponseKeys {
-//        static let Results = "results"
-//    }
+    // wil be replaced by codable structs, if possible
+    struct ParseJSONResponseKeys {
+        static let Results = "results"
+    }
     
     struct ParseParameterKeys {
         static let APIKey = "X-Parse-REST-API-Key"

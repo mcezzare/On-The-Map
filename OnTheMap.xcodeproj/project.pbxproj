@@ -10,6 +10,8 @@
 		2509B258221BA6D50095F6AD /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2509B257221BA6D50095F6AD /* ParseClient.swift */; };
 		2509B25A221BA7560095F6AD /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2509B259221BA7560095F6AD /* ParseConstants.swift */; };
 		2526D64B2221F14800E4177C /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526D64A2221F14800E4177C /* StudentInformation.swift */; };
+		2526D64D2221F76900E4177C /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526D64C2221F76900E4177C /* ParseConvenience.swift */; };
+		2526D64F22233B9600E4177C /* StudentsLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526D64E22233B9600E4177C /* StudentsLocation.swift */; };
 		252EA7AA221263770027D01F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7A9221263770027D01F /* LoginViewController.swift */; };
 		252EA7AD221266F50027D01F /* UiViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7AC221266F50027D01F /* UiViewExtensions.swift */; };
 		252EA7AF22126D2B0027D01F /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7AE22126D2B0027D01F /* ViewControllerExtensions.swift */; };
@@ -58,6 +60,8 @@
 		2509B257221BA6D50095F6AD /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		2509B259221BA7560095F6AD /* ParseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
 		2526D64A2221F14800E4177C /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		2526D64C2221F76900E4177C /* ParseConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
+		2526D64E22233B9600E4177C /* StudentsLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsLocation.swift; sourceTree = "<group>"; };
 		252EA7A9221263770027D01F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		252EA7AC221266F50027D01F /* UiViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiViewExtensions.swift; sourceTree = "<group>"; };
 		252EA7AE22126D2B0027D01F /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			children = (
 				2509B257221BA6D50095F6AD /* ParseClient.swift */,
 				2509B259221BA7560095F6AD /* ParseConstants.swift */,
+				2526D64C2221F76900E4177C /* ParseConvenience.swift */,
 			);
 			path = Parse;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				2526D64A2221F14800E4177C /* StudentInformation.swift */,
+				2526D64E22233B9600E4177C /* StudentsLocation.swift */,
 			);
 			path = Parse;
 			sourceTree = "<group>";
@@ -403,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2526D64D2221F76900E4177C /* ParseConvenience.swift in Sources */,
 				259D24042218A99700544CE2 /* BaseTabViewController.swift in Sources */,
 				252EA7AA221263770027D01F /* LoginViewController.swift in Sources */,
 				259D24062218B74700544CE2 /* PinViewController.swift in Sources */,
@@ -414,6 +421,7 @@
 				25F8FEE2220BC392007BB3B2 /* ViewController.swift in Sources */,
 				252EA7B322126ED90027D01F /* UdacityClient.swift in Sources */,
 				2526D64B2221F14800E4177C /* StudentInformation.swift in Sources */,
+				2526D64F22233B9600E4177C /* StudentsLocation.swift in Sources */,
 				259D23F522189D4B00544CE2 /* Constants.swift in Sources */,
 				259D24022218A54700544CE2 /* PostViewController.swift in Sources */,
 				259D24002218A4C600544CE2 /* ListViewController.swift in Sources */,

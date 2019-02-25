@@ -18,3 +18,10 @@ extension UIView {
     }
     
 }
+
+// MARK: concentrate all Notifications of the app
+extension Notification.Name {
+    static let reload = Notification.Name("reload")
+    static let reloadStarted = Notification.Name("reloadStarted")
+    static let reloadCompleted = Notification.Name("reloadCompleted")
+}
