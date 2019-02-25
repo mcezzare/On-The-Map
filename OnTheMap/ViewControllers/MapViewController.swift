@@ -25,7 +25,7 @@ class MapViewController : BaseMapViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCompleted), name: .reloadCompleted, object: nil)
         
         mapView.delegate = self
-//        loadUserInfo()
+        //        loadUserInfo()
     }
     
     deinit {
@@ -62,6 +62,6 @@ class MapViewController : BaseMapViewController {
         }
         mapView.showAnnotations(mapView.annotations, animated: true)
     }
-
+    
     
 }

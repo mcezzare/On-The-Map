@@ -91,7 +91,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aVg-ng-80G">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aVg-ng-80G">
                                 <rect key="frame" x="177" y="331" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="T1a-w1-iuH"/>
@@ -126,20 +126,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-uR-Rre">
-                                <rect key="frame" x="16" y="64" width="343" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uBU-6z-T7f">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uBU-6z-T7f">
                                 <rect key="frame" x="177" y="331" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NWy-uR-Rre" firstAttribute="leading" secondItem="JFm-pP-Wwb" secondAttribute="leadingMargin" id="24b-21-ZwD"/>
+                            <constraint firstItem="NWy-uR-Rre" firstAttribute="leading" secondItem="28w-bF-aOh" secondAttribute="leading" id="24b-21-ZwD"/>
                             <constraint firstItem="NWy-uR-Rre" firstAttribute="top" secondItem="28w-bF-aOh" secondAttribute="top" id="FAr-RZ-NqF"/>
                             <constraint firstItem="NWy-uR-Rre" firstAttribute="height" secondItem="28w-bF-aOh" secondAttribute="height" id="JoR-38-ffA"/>
                             <constraint firstItem="uBU-6z-T7f" firstAttribute="centerX" secondItem="28w-bF-aOh" secondAttribute="centerX" id="Nq6-f4-nyn"/>
                             <constraint firstItem="uBU-6z-T7f" firstAttribute="centerY" secondItem="28w-bF-aOh" secondAttribute="centerY" id="YGW-ol-g0E"/>
-                            <constraint firstItem="NWy-uR-Rre" firstAttribute="trailing" secondItem="JFm-pP-Wwb" secondAttribute="trailingMargin" id="ni5-fZ-frG"/>
+                            <constraint firstItem="NWy-uR-Rre" firstAttribute="trailing" secondItem="28w-bF-aOh" secondAttribute="trailing" id="ni5-fZ-frG"/>
                             <constraint firstItem="NWy-uR-Rre" firstAttribute="bottom" secondItem="28w-bF-aOh" secondAttribute="bottom" id="yh3-gN-RlX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="28w-bF-aOh"/>
@@ -204,7 +204,7 @@
                                     <constraint firstItem="0Fc-za-S6N" firstAttribute="height" secondItem="xLU-L3-BEh" secondAttribute="height" id="rdz-I2-hKa"/>
                                 </constraints>
                             </stackView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-Rk-Rse">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-Rk-Rse">
                                 <rect key="frame" x="177" y="355.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="NIi-S1-v4n"/>
@@ -247,7 +247,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="r3V-lJ-awn">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="r3V-lJ-awn">
                                 <rect key="frame" x="177" y="333.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="rjw-9S-SLU"/>

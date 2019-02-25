@@ -18,6 +18,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var signUpButton: UIButton!
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +88,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 self.showInfoAlert(theTitle: "Error" , theMessage: error)
                 return
             } else {
-                print(studentInfo) // TODO: something
+                UdacityClient.sharedInstance().udacityUser = studentInfo
+                if self.appDelegate.DEBUG{
+                    print("DEBUG LOGIN CYCLE")
+                    print(studentInfo!)
+                }
+                
             }
         })
         

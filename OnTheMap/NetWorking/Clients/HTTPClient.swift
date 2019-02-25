@@ -15,7 +15,7 @@ class HTTPCLient : NSObject {
     // MARK :
     var session = URLSession.shared
     
-    // authentication state
+    // authentication state will be moved to the correct class
     //    var sessionID: String? = nil
     //    var userKey = ""
     //    var userName = ""
@@ -142,7 +142,7 @@ class HTTPCLient : NSObject {
             }
         }
         
-        if appDelegate.DEBUG {
+        if self.appDelegate.DEBUG {
             print("DEBUG INFO")
             print(request.allHTTPHeaderFields!)
         }
@@ -188,8 +188,10 @@ class HTTPCLient : NSObject {
                 newData = data.subdata(in: range) /* subset response data! */
             }
             
-            print(String(data: newData, encoding: .utf8)!)
-            
+            if self.appDelegate.DEBUG {
+                print("DEBUG INFO")
+                print(String(data: newData, encoding: .utf8)!)
+            }
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             completionHandlerForGet(newData,nil)
             
