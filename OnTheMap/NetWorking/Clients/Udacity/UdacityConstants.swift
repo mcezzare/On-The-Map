@@ -20,13 +20,15 @@ extension UdacityClient {
         static let Authentication = "/session"
         static let Users = "/users"
     }
+
     
-    struct JSONResponseKeys{
-        static let Key = "key"
-        static let LastName = "last_name"
-        static let FirstName = "first_name"
-        static let ImageUrl = "_image_url"
-    }
-    
+// will be replaced by codable structs
+//    struct JSONResponseKeys{
+//        static let Key = "key"
+//        static let LastName = "last_name"
+//        static let FirstName = "first_name"
+//        static let ImageUrl = "_image_url"
+//    }
+//    
     
 }

@@ -18,3 +18,10 @@ extension UIView {
     }
     
 }
+
+// MARK: concentrate all Notifications of the app, basicaly to start/stop the status of UIActivityIndicatorView
+extension Notification.Name {
+    static let reload = Notification.Name("reload")
+    static let reloadStarted = Notification.Name("reloadStarted")
+    static let reloadCompleted = Notification.Name("reloadCompleted")
+}

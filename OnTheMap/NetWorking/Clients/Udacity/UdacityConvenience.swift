@@ -9,6 +9,8 @@
 import Foundation
 
 extension UdacityClient {
+    
+    
     func authenticateUser(userEmail: String, userPassword: String, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
         // Build Json body of request
@@ -31,7 +33,7 @@ extension UdacityClient {
                 } else {
                     
                     // work on data result
-                    print("Request Worked")
+                    // print("Request Worked")
                     do {
                         let userSession = try UserSession(data: data!)
                         if !userSession.account.registered {
@@ -43,11 +45,39 @@ extension UdacityClient {
                     }
                     catch {
                         // what kind of error can happen here ?
-                        print("Could not find the looged response itens")
+                        print("Could not find the logged response itens")
                         completionHandlerForAuth(false, error.localizedDescription)
                     }
                 }
         })
+    }
+    
+    // MARK : Get info about Student after login
+    func getStudentInfo(completionHandler: @escaping(_ result:UdacityUser?, _ error:String?) -> Void){
+        
+        let urlPath = UdacityClient.UdacityMethods.Users + "/" + self.userSession.account.key
+        
+        _ = HTTPCLient.shared().taskForGetMethod(
+            url: urlPath,
+            parameters: [:],
+            completionHandlerForGet: { (data,error) in
+                if let error = error {
+                    print(error)
+                    completionHandler(nil,error.localizedDescription)
+                } else {
+                    do{
+                        let udacityUser = try UdacityUser(data: data!)
+                        self.udacityUser = udacityUser
+                        completionHandler(udacityUser,nil)
+                    }
+                    catch{
+                        print("Could not read user details")
+                        completionHandler(nil, "Could not read user details")
+                    }
+                }
+        }
+        )
+        
     }
     
     
