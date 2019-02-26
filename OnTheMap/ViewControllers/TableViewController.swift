@@ -9,49 +9,52 @@
 import Foundation
 import UIKit
 
-class TableViewController : UITableViewController {
+class TableViewController : UIViewController , LocationSelectionDelegate {
     
     // MARK: OUTLETS
-    @IBOutlet var studentsTableView: UITableView!
+    @IBOutlet weak var studentsTableView: UITableView!
+    @IBOutlet weak var dataProvider: DataProvider!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-   
+    
     // MARK: Lyfe cicle
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadStarted), name: .reloadStarted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCompleted), name: .reloadCompleted, object: nil)
-        
+        dataProvider.delegate = self
+        studentsTableView.dataSource = dataProvider
+        studentsTableView.delegate = dataProvider
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        reloadCompleted()
-    }
+    //
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //        reloadCompleted()
+    //    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    // MARK : Delegate Methods
-    // MARK : Init data and datasources
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return StudentsLocation.shared.studentsInformation.count
-    }
-    
-    // MARK : Data Table and cell information
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.identifier, for: indexPath) as! LocationCell
-        cell.configWith(StudentsLocation.shared.studentsInformation[indexPath.row])
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let studentInformation = StudentsLocation.shared.studentsInformation[indexPath.row]
-        openWithSafari(studentInformation.mediaURL)
-    }
-    
-    
+    /*
+     // MARK : Delegate Methods
+     // MARK : Init data and datasources
+     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     return StudentsLocation.shared.studentsInformation.count
+     }
+     
+     // MARK : Data Table and cell information
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.identifier, for: indexPath) as! LocationCell
+     cell.configWith(StudentsLocation.shared.studentsInformation[indexPath.row])
+     return cell
+     }
+     
+     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     let studentInformation = StudentsLocation.shared.studentsInformation[indexPath.row]
+     openWithSafari(studentInformation.mediaURL)
+     }
+     
+     */
     // MARK: - Helpers
     
     @objc func reloadStarted () {
@@ -67,7 +70,11 @@ class TableViewController : UITableViewController {
         }
     }
     
-
+    // MARK: - LocationSelectionDelegate
+    
+    func didSelectLocation(info: StudentInformation) {
+        openWithSafari(info.mediaURL)
+    }
     
 }
 
