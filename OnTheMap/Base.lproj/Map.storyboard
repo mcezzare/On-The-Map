@@ -114,10 +114,12 @@
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" selectedImage="icon_listview-selected" id="sao-F0-TzK"/>
                     <connections>
                         <outlet property="activityIndicator" destination="aVg-ng-80G" id="e9p-pV-HU9"/>
+                        <outlet property="dataProvider" destination="vqe-jx-W25" id="SOL-8X-M5O"/>
                         <outlet property="tableView" destination="Lww-Rz-aeI" id="N5o-y5-58h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I4e-bu-4aV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="vqe-jx-W25" customClass="DataTableProvider" customModule="OnTheMap" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1212" y="586"/>
         </scene>

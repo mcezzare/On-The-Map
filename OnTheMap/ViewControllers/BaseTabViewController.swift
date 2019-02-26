@@ -28,7 +28,7 @@ class BaseTabViewController : UITabBarController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     @IBAction func reload(_ sender: Any){
         loadStudentsInformation()
     }

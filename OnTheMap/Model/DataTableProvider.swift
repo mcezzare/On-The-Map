@@ -6,21 +6,22 @@
 //  Copyright © 2019 Mario Cezzare. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 protocol LocationSelectionDelegate: class {
     func didSelectLocation(info: StudentInformation)
 }
 
-class DataProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
+class DataTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     weak var delegate: LocationSelectionDelegate?
     
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return StudentsLocation.shared.studentsInformation.count
+        let totalStudents = StudentsLocation.shared.studentsInformation.count
+        print("DEBUG FROM DATA PROVIDER \(totalStudents)")
+        return totalStudents
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

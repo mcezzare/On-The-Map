@@ -9,32 +9,57 @@
 import Foundation
 import UIKit
 
-class TableViewController : UIViewController , LocationSelectionDelegate {
+class TableViewController : UIViewController, LocationSelectionDelegate  {
     
     // MARK: OUTLETS
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dataProvider: DataProvider!
+    @IBOutlet weak var dataProvider: DataTableProvider!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    // MARK: Delegates
+    //    let locationSelectionDelegate = LocationSelectionDelegate()
     
     
     // MARK: Lyfe cicle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadStarted), name: .reloadStarted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCompleted), name: .reloadCompleted, object: nil)
-        dataProvider.delegate = self
+        
+        //        dataProvider.delegate = locationSelectionDelegate
+        dataProvider.delegate? = self // IS CRASHING WITH NIL VALUE
         tableView.dataSource = dataProvider
         tableView.delegate = dataProvider
+        
+        reloadCompleted()
     }
-    //
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //        reloadCompleted()
-    //    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+
+    // MARK: - Helpers
+    
+    @objc func reloadStarted() {
+        performUIUpdatesOnMain {
+            self.activityIndicator.startAnimating()
+        }
+    }
+    
+    @objc func reloadCompleted() {
+        performUIUpdatesOnMain {
+            self.activityIndicator.stopAnimating()
+            self.tableView.reloadData()
+        }
+    }
+    
+    // MARK: - LocationSelectionDelegate
+    
+    func didSelectLocation(info: StudentInformation) {
+        openWithSafari(info.mediaURL)
+    }
+
     /*
      // MARK : Delegate Methods
      // MARK : Init data and datasources
@@ -55,26 +80,7 @@ class TableViewController : UIViewController , LocationSelectionDelegate {
      }
      
      */
-    // MARK: - Helpers
     
-    @objc func reloadStarted () {
-        performUIUpdatesOnMain {
-            self.activityIndicator.startAnimating()
-        }
-    }
-    
-    @objc func reloadCompleted() {
-        performUIUpdatesOnMain {
-            self.activityIndicator.stopAnimating()
-            self.tableView.reloadData()
-        }
-    }
-    
-    // MARK: - LocationSelectionDelegate
-    
-    func didSelectLocation(info: StudentInformation) {
-        openWithSafari(info.mediaURL)
-    }
     
 }
 
