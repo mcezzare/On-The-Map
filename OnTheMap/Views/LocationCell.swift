@@ -16,9 +16,10 @@ class LocationCell: UITableViewCell {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelUrl: UILabel!
     
-//    func configWith(_ info: StudentInformation) {
-//        labelName.text = info.labelName
-//        labelUrl.text = info.mediaURL
-//    }
+    // MARK: Configure cell with basic information about Student Location
+    func configWith(_ info: StudentInformation) {
+        labelName.text = info.labelName
+        labelUrl.text = info.mediaURL
+    }
     
 }

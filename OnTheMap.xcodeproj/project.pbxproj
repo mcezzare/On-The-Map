@@ -25,7 +25,7 @@
 		259D23F522189D4B00544CE2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D23F422189D4B00544CE2 /* Constants.swift */; };
 		259D23FC2218A34900544CE2 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 259D23FA2218A34900544CE2 /* Map.storyboard */; };
 		259D23FE2218A46700544CE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D23FD2218A46700544CE2 /* MapViewController.swift */; };
-		259D24002218A4C600544CE2 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D23FF2218A4C600544CE2 /* ListViewController.swift */; };
+		259D24002218A4C600544CE2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D23FF2218A4C600544CE2 /* TableViewController.swift */; };
 		259D24022218A54700544CE2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D24012218A54700544CE2 /* PostViewController.swift */; };
 		259D24042218A99700544CE2 /* BaseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D24032218A99700544CE2 /* BaseTabViewController.swift */; };
 		259D24062218B74700544CE2 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D24052218B74700544CE2 /* PinViewController.swift */; };
@@ -76,7 +76,7 @@
 		259D23F422189D4B00544CE2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		259D23FB2218A34900544CE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		259D23FD2218A46700544CE2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		259D23FF2218A4C600544CE2 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		259D23FF2218A4C600544CE2 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		259D24012218A54700544CE2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		259D24032218A99700544CE2 /* BaseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabViewController.swift; sourceTree = "<group>"; };
 		259D24052218B74700544CE2 /* PinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			children = (
 				252EA7A9221263770027D01F /* LoginViewController.swift */,
 				259D23FD2218A46700544CE2 /* MapViewController.swift */,
-				259D23FF2218A4C600544CE2 /* ListViewController.swift */,
+				259D23FF2218A4C600544CE2 /* TableViewController.swift */,
 				259D24012218A54700544CE2 /* PostViewController.swift */,
 				259D24032218A99700544CE2 /* BaseTabViewController.swift */,
 				259D24052218B74700544CE2 /* PinViewController.swift */,
@@ -427,7 +427,7 @@
 				2526D64F22233B9600E4177C /* StudentsLocation.swift in Sources */,
 				259D23F522189D4B00544CE2 /* Constants.swift in Sources */,
 				259D24022218A54700544CE2 /* PostViewController.swift in Sources */,
-				259D24002218A4C600544CE2 /* ListViewController.swift in Sources */,
+				259D24002218A4C600544CE2 /* TableViewController.swift in Sources */,
 				252EA7C02213C1C20027D01F /* UserSession.swift in Sources */,
 				25F8FEE0220BC392007BB3B2 /* AppDelegate.swift in Sources */,
 				252EA7AF22126D2B0027D01F /* ViewControllerExtensions.swift in Sources */,
