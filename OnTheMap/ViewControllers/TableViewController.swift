@@ -16,9 +16,6 @@ class TableViewController : UIViewController, LocationSelectionDelegate  {
     @IBOutlet weak var dataProvider: DataTableProvider!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    // MARK: Delegates
-    //    let locationSelectionDelegate = LocationSelectionDelegate()
-    
     
     // MARK: Lyfe cicle
     override func viewDidLoad() {
@@ -38,7 +35,7 @@ class TableViewController : UIViewController, LocationSelectionDelegate  {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     // MARK: - Helpers
     
     @objc func reloadStarted() {
@@ -54,33 +51,11 @@ class TableViewController : UIViewController, LocationSelectionDelegate  {
         }
     }
     
-    // MARK: - LocationSelectionDelegate
-    
+    // Required by protocol, not working Yet
     func didSelectLocation(info: StudentInformation) {
-        openWithSafari(info.mediaURL)
+        print("DEBUG: Calling safari")
+        self.openWithSafari(info.mediaURL)
     }
-
-    /*
-     // MARK : Delegate Methods
-     // MARK : Init data and datasources
-     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     return StudentsLocation.shared.studentsInformation.count
-     }
-     
-     // MARK : Data Table and cell information
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.identifier, for: indexPath) as! LocationCell
-     cell.configWith(StudentsLocation.shared.studentsInformation[indexPath.row])
-     return cell
-     }
-     
-     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     let studentInformation = StudentsLocation.shared.studentsInformation[indexPath.row]
-     openWithSafari(studentInformation.mediaURL)
-     }
-     
-     */
-    
     
 }
 

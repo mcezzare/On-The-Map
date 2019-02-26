@@ -20,7 +20,7 @@ class DataTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let totalStudents = StudentsLocation.shared.studentsInformation.count
-        print("DEBUG FROM DATA PROVIDER \(totalStudents)")
+//        print("DEBUG FROM DATA PROVIDER \(totalStudents)")
         return totalStudents
     }
     
@@ -33,12 +33,16 @@ class DataTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectLocation(info: StudentsLocation.shared.studentsInformation[indexPath.row])
-        tableView.deselectRow(at: indexPath, animated: true)
+        let studentInfo = StudentsLocation.shared.studentsInformation[indexPath.row]
+        print("DEBUG: Selecionando cell \(studentInfo)")
+        print("DEBUG URL: \(studentInfo.mediaURL)")
+//        delegate?.didSelectLocation(info: studentInfo)
+        self.delegate?.didSelectLocation(info: studentInfo)
+//        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
