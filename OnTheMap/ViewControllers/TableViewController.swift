@@ -6,6 +6,7 @@
 //  Copyright © 2019 Mario Cezzare. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class TableViewController : UITableViewController {
@@ -62,11 +63,11 @@ class TableViewController : UITableViewController {
     @objc func reloadCompleted() {
         performUIUpdatesOnMain {
             self.activityIndicator.stopAnimating()
-            self.tableView.reloadData()
+            self.studentsTableView.reloadData()
         }
     }
     
-    // MARK: - LocationSelectionDelegate
+
     
 }
 
