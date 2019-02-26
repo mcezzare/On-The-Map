@@ -12,7 +12,7 @@ import UIKit
 class TableViewController : UIViewController , LocationSelectionDelegate {
     
     // MARK: OUTLETS
-    @IBOutlet weak var studentsTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dataProvider: DataProvider!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -23,8 +23,8 @@ class TableViewController : UIViewController , LocationSelectionDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadStarted), name: .reloadStarted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCompleted), name: .reloadCompleted, object: nil)
         dataProvider.delegate = self
-        studentsTableView.dataSource = dataProvider
-        studentsTableView.delegate = dataProvider
+        tableView.dataSource = dataProvider
+        tableView.delegate = dataProvider
     }
     //
     //    override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +66,7 @@ class TableViewController : UIViewController , LocationSelectionDelegate {
     @objc func reloadCompleted() {
         performUIUpdatesOnMain {
             self.activityIndicator.stopAnimating()
-            self.studentsTableView.reloadData()
+            self.tableView.reloadData()
         }
     }
     

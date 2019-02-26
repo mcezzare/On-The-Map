@@ -114,8 +114,7 @@
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" selectedImage="icon_listview-selected" id="sao-F0-TzK"/>
                     <connections>
                         <outlet property="activityIndicator" destination="aVg-ng-80G" id="e9p-pV-HU9"/>
-                        <outlet property="studentsTableView" destination="Lww-Rz-aeI" id="N5o-y5-58h"/>
-                        <outlet property="tableView" destination="Lww-Rz-aeI" id="HtE-OX-f2X"/>
+                        <outlet property="tableView" destination="Lww-Rz-aeI" id="N5o-y5-58h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I4e-bu-4aV" userLabel="First Responder" sceneMemberID="firstResponder"/>
