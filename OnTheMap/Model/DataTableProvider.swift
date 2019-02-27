@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LocationSelectionDelegate : class {
+protocol LocationSelectionDelegate : AnyObject {
     func didSelectLocation(info: StudentInformation)
 }
 
@@ -53,3 +53,5 @@ class DataTableProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
         //tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
+
