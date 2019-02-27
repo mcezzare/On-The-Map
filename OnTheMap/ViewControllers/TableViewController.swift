@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 
 class TableViewController : UIViewController, LocationSelectionDelegate  {
+    // Required by protocol , but not working. How to solve this ? 
+    func didSelectLocation(info: StudentInformation) {
+        print("DEBUG: Calling safari")
+        openWithSafari(info.mediaURL)
+    }
+    
     
     // MARK: OUTLETS
     @IBOutlet weak var tableView: UITableView!
@@ -24,8 +30,7 @@ class TableViewController : UIViewController, LocationSelectionDelegate  {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadStarted), name: .reloadStarted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCompleted), name: .reloadCompleted, object: nil)
         
-        //        dataProvider.delegate = locationSelectionDelegate
-        dataProvider.delegate? = self // IS CRASHING WITH NIL VALUE
+        dataProvider.delegate? = self
         tableView.dataSource = dataProvider
         tableView.delegate = dataProvider
         
@@ -52,10 +57,10 @@ class TableViewController : UIViewController, LocationSelectionDelegate  {
     }
     
     // Required by protocol, not working Yet
-    func didSelectLocation(info: StudentInformation) {
-        print("DEBUG: Calling safari")
-        self.openWithSafari(info.mediaURL)
-    }
+    //    func didSelectLocation(info: StudentInformation) {
+    //        print("DEBUG: Calling safari")
+    //        openWithSafari(info.mediaURL)
+    //    }
     
 }
 
