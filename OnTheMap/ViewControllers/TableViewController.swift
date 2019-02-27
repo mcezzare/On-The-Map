@@ -56,11 +56,6 @@ class TableViewController : UIViewController, LocationSelectionDelegate  {
         }
     }
     
-    // Required by protocol, not working Yet
-    //    func didSelectLocation(info: StudentInformation) {
-    //        print("DEBUG: Calling safari")
-    //        openWithSafari(info.mediaURL)
-    //    }
     
 }
 
