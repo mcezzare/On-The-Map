@@ -225,6 +225,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qEU-3x-kfd"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="NG8-Rk-Rse" id="gh1-zB-IB4"/>
+                        <outlet property="findLocationButton" destination="0Fc-za-S6N" id="uSx-Gd-mvM"/>
+                        <outlet property="locationTextField" destination="xLU-L3-BEh" id="6Cn-Ud-HA1"/>
+                        <outlet property="urlTextField" destination="7R0-6t-l1P" id="Uvz-9w-GMG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPU-ds-XHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

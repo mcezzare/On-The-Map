@@ -10,6 +10,14 @@ import UIKit
 
 class PostViewController : UIViewController {
     
+    // MARK: Outlets
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var findLocationButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
