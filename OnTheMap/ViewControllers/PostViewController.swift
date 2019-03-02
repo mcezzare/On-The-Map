@@ -20,7 +20,23 @@ class PostViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        findLocationButton.makeRoundedCorners()
+        configureNavBar()
     }
+    
+    // MARK: - Configure the navbar
+    
+    
+    /// Pre-Requisite of project is the back button must have the title "Cancel"
+    private func configureNavBar(){
+        self.navigationItem.title = "Adicionar localização"
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = "Cancelar"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+    
+    
     
 }
 
