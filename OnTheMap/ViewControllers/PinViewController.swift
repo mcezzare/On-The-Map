@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+/// Identified in StoryBoard by `PinLocationView`
 class PinViewController : UITabBarController {
     
     override func viewDidLoad() {
