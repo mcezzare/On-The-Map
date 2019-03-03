@@ -11,14 +11,18 @@ import Foundation
 extension ParseClient {
     func getStudentsLocation(completionHandler: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void){
         //        let params = [ParseClient.ParseMethods.StudentLocation: "-updatedAt" as AnyObject]
-        let parseApiHeaders=[
+        let parseApiHeaders = [
             ParseClient.ParseParameterKeys.APIKey:ParseClient.ParseParametersValues.APIKey,
             ParseClient.ParseParameterKeys.ApplicationID:ParseClient.ParseParametersValues.ApplicationID
+        ]
+        // Criteria of project, order by updateAt desc
+        let queryParameters = [
+            ParseClient.ParseParameterKeys.Order:ParseClient.ParseParametersValues.UpdateAtReverseOrder as AnyObject
         ]
         
         _ = HTTPCLient.shared().taskForGetMethod(
             url: ParseClient.ParseMethods.StudentLocation,
-            parameters: [:],
+            parameters: queryParameters,
             requestHeaderParameters: parseApiHeaders,
             apiType: .parse,
             completionHandlerForGet: { (data, error) in

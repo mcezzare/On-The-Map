@@ -143,8 +143,10 @@ class HTTPCLient : NSObject {
         }
         
         if self.appDelegate.DEBUG {
-            print("DEBUG INFO")
+            print("DEBUG INFO HEADERS")
             print(request.allHTTPHeaderFields!)
+            print("DEBUG INFO QUERYSTRING")
+            print(request)
         }
         
         /* 4. Make the request */
