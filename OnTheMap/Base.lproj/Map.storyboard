@@ -279,6 +279,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OXd-L9-UFg"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="r3V-lJ-awn" id="P2N-CP-LM6"/>
+                        <outlet property="finishPostLocationButton" destination="tes-l8-cdA" id="C2p-Bg-BWI"/>
+                        <outlet property="mapView" destination="8mB-b8-o3t" id="wnd-Li-tJ6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ht-Nm-8Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
