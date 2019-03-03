@@ -10,7 +10,10 @@ import UIKit
 
 
 /// Identified in StoryBoard by `PinLocationView`
-class PinViewController : UITabBarController {
+class PinViewController : BaseMapViewController {
+    
+    // MARK: - Properties
+    var studentInformation: StudentInformation!
     
     override func viewDidLoad() {
         super.viewDidLoad()

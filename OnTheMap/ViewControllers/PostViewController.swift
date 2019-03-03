@@ -85,12 +85,41 @@ class PostViewController : UIViewController {
     }
     
     
+    /// Save the coordinates translated by address string and call buildStudentIformation to send to pinLocationView
+    ///
+    /// - Parameter coordinate: translated coordinates
     private func saveInformedLocation( _ coordinate: CLLocationCoordinate2D){
         if appDelegate.DEBUG {
             print("DEBUG: Coordenadas encontradas:\(coordinate)")
         }
         
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "PinLocationView") as! PinViewController
+        viewController.studentInformation = self.buildStudentInformation(coordinate)
+        navigationController?.pushViewController(viewController, animated: true)
         
+    }
+    
+    
+    /// Prepare a StudentInformation to Post with the new location to PARSE API
+    ///
+    /// - Parameter coordinate: CLLocationCoordinate2D the new coordinates
+    /// - Returns: StudentInformation object
+    private func buildStudentInformation(_ coordinate: CLLocationCoordinate2D) -> StudentInformation {
+        let udacityUser = UdacityClient.sharedInstance().udacityUser
+        
+        
+        // Lets supose the user don't have any location saved yet
+        let studentInfoBuilder = [
+            "uniqueKey" : udacityUser?.key as Any, // It will always have this value in this point
+            "firstName": udacityUser?.firstName ?? "",
+            "lastName": udacityUser?.lastName ?? "",
+            "mapString": locationTextField.text!,
+            "mediaURL": urlTextField.text!,
+            "latitude": coordinate.latitude,
+            "longitude": coordinate.longitude,
+            ] as [String: AnyObject]
+        
+        return StudentInformation(studentInfoBuilder)
         
     }
     
