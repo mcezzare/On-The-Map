@@ -50,5 +50,20 @@ class BaseTabViewController : UITabBarController {
         }
     }
     
+    
+    /// LogOff the current user, destroy the session and go to the login screen
+    ///
+    /// - Parameter sender: the Logout button
+    @IBAction func logout(_ sender: Any){
+        UdacityClient.sharedInstance().logout(){ (success,error) in
+            if success {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                self.showInfoAlert(theTitle: "Erro" , theMessage: error!.localizedDescription)
+            }
+            
+            
+        }
+    }
 }
 

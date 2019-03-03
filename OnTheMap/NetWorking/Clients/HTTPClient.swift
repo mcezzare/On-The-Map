@@ -205,6 +205,85 @@ class HTTPCLient : NSObject {
         
     }
     
+    // MARK: Method to make DELETE requests
+    func taskForDeleteMethod(
+        _ method                   : String,
+        parameters                 : [String:AnyObject],
+        apiType                    : APIType = .udacity,
+        completionHandlerForDelete : @escaping (_ result: Data?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+        
+        let request = NSMutableURLRequest(url: buildURLFromParameters(parameters, withPathExtension: method, apiType: apiType))
+        request.httpMethod = "DELETE"
+        
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        showActivityIndicator(true)
+        
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            
+            func sendError(_ error: String) {
+                self.showActivityIndicator(false)
+                print(error)
+                let userInfo = [NSLocalizedDescriptionKey : error]
+                completionHandlerForDelete(nil, NSError(domain: "taskForDeleteMethod", code: 1, userInfo: userInfo))
+            }
+            
+            /* GUARD: Was there an error? */
+            guard (error == nil) else {
+                sendError("There was an error with your request: \(error!.localizedDescription)")
+                return
+            }
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                sendError("Request did not return a valid response.")
+                return
+            }
+            
+            switch (statusCode) {
+            case 403:
+                sendError("Please check your credentials and try again.")
+            case 200 ..< 299:
+                break
+            default:
+                sendError("Your request returned a status code other than 2xx!")
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                sendError("No data was returned by the request!")
+                return
+            }
+            
+            // skipping the first 5 characters for Udacity API calls
+            var newData = data
+            if apiType == .udacity {
+                let range = Range(5..<data.count)
+                newData = data.subdata(in: range)
+            }
+            
+            self.showActivityIndicator(false)
+            
+            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            completionHandlerForDelete(newData, nil)
+            
+        }
+        task.resume()
+        return task
+    }
+    
+    
+    
+    
+    
     // MARK: - Apis used in this project
     
     enum APIType {
@@ -228,5 +307,15 @@ class HTTPCLient : NSObject {
         
         return components.url!
     }
+    
+    /// Show or Hide Network activity indicator.
+    ///
+    /// - Parameter show: use either **true** to show or **false** to hide it
+    private func showActivityIndicator(_ show: Bool) {
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = show
+        }
+    }
+
     
 }

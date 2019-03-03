@@ -294,7 +294,11 @@
             <objects>
                 <tabBarController id="MGr-nL-cYw" customClass="BaseTabViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="8CF-J5-3Vf">
-                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="uWf-mJ-cSe" userLabel="LogoutButton"/>
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="uWf-mJ-cSe" userLabel="LogoutButton">
+                            <connections>
+                                <action selector="logout:" destination="MGr-nL-cYw" id="CRz-xa-47W"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="ZI6-FU-RTr" userLabel="PostButton">
                                 <connections>

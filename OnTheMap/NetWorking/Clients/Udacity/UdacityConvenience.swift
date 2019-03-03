@@ -37,7 +37,7 @@ extension UdacityClient {
                     do {
                         let userSession = try UserSession(data: data!)
                         if !userSession.account.registered {
-                            completionHandlerForAuth(false, "Login Failed, user not registered.")
+                            completionHandlerForAuth(false, "Login falhou, usuário não registrado.")
                         }else {
                             self.userSession = userSession
                             completionHandlerForAuth(true, nil)
@@ -45,12 +45,42 @@ extension UdacityClient {
                     }
                     catch {
                         // what kind of error can happen here ?
-                        print("Could not find the logged response itens")
+                        print("Não foi possível encontrar os dados de Usuário.")
                         completionHandlerForAuth(false, error.localizedDescription)
                     }
                 }
         })
     }
+    
+    
+    /// Logout the current user and destroy the session based on Cookie from Login
+    ///
+    /// - Parameter completionHandlerForLogout: return **true** if works and **false** on fail and describes the error
+    func logout(completionHandlerForLogout: @escaping (_ success: Bool, _ error: Error?) -> Void){
+        let urlPath = UdacityClient.UdacityMethods.Authentication
+        _ = HTTPCLient.shared().taskForDeleteMethod(
+            urlPath,
+            parameters: [:],
+            completionHandlerForDelete:{ (data,error) in
+                if let error = error {
+                    print(error)
+                    completionHandlerForLogout(false,error)
+                } else {
+                    
+                    let sessionData = self.parseSession(data: data)
+                    print(sessionData)
+                    if let _ = sessionData.0 {
+                        self.userSession = nil
+                        completionHandlerForLogout(true, nil)
+                    } else {
+                        completionHandlerForLogout(false, sessionData.1!)
+                    }
+                }
+                
+        }
+        )
+    }
+    
     
     // MARK : Get info about Student after login
     func getStudentInfo(completionHandler: @escaping(_ result:UdacityUser?, _ error:String?) -> Void){
@@ -78,6 +108,31 @@ extension UdacityClient {
         }
         )
         
+    }
+    
+    
+    
+    /// Prepare data from user Session. Used only to logout the current Udacity user
+    ///
+    /// - Parameter data: Struct Session from udacity api
+    /// - Returns: The Session struct without the **account** json node from login
+    func parseSession(data: Data?) -> (Session?, Error?) {
+        var sessionData: (session: Session?, error: Error?) = (nil, nil)
+        do {
+            
+            struct SessionData: Codable {
+                let session: Session
+            }
+            
+            if let data = data {
+                let jsonDecoder = JSONDecoder()
+                sessionData.session = try jsonDecoder.decode(SessionData.self, from: data).session
+            }
+        } catch {
+            print(error)
+            sessionData.error = error
+        }
+        return sessionData
     }
     
     
