@@ -44,6 +44,7 @@ class HTTPCLient : NSObject {
         parameters                          : [String:AnyObject],
         requestHeaderParameters httpHeaders : [String:String]? = nil,
         apiType                             : APIType = .udacity,
+        methodHttp                          : HTTPMethod? = .post,
         completionHandlerForPost            : @escaping (_ result: Data?, _ error: NSError?) -> Void ) -> URLSessionDataTask {
         
         /* 1. Set the parameters */
@@ -52,7 +53,7 @@ class HTTPCLient : NSObject {
         
         /* 2/3. Build the URL, Configure the request */
         var request = NSMutableURLRequest(url: urlString)
-        request.httpMethod = "POST"
+        request.httpMethod = (methodHttp?.getVerb())!
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonBody.data(using: String.Encoding.utf8)
@@ -112,7 +113,10 @@ class HTTPCLient : NSObject {
                 newData = data.subdata(in: range) /* subset response data! */
             }
             
-            print(String(data: newData, encoding: .utf8)!)
+            if self.appDelegate.DEBUG {
+                print("DEBUG: RETURN DATA->")
+                print(String(data: newData, encoding: .utf8)!)
+            }
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             completionHandlerForPost(newData,nil)
@@ -131,6 +135,7 @@ class HTTPCLient : NSObject {
         parameters                          : [String:AnyObject],
         requestHeaderParameters httpHeaders : [String:String]? = nil,
         apiType                             : APIType = .udacity,
+        methodHttp                          : HTTPMethod? = .get,
         completionHandlerForGet            : @escaping (_ result: Data?, _ error: NSError?) -> Void ) -> URLSessionDataTask {
         
         /* 1. Set the parameters */
@@ -139,7 +144,7 @@ class HTTPCLient : NSObject {
         
         /* 2/3. Build the URL, Configure the request */
         var request = NSMutableURLRequest(url: urlString)
-        request.httpMethod = "GET"
+        request.httpMethod = (methodHttp?.getVerb())!
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -217,10 +222,11 @@ class HTTPCLient : NSObject {
         _ method                   : String,
         parameters                 : [String:AnyObject],
         apiType                    : APIType = .udacity,
+        methodHttp                 : HTTPMethod? = .delete,
         completionHandlerForDelete : @escaping (_ result: Data?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         let request = NSMutableURLRequest(url: buildURLFromParameters(parameters, withPathExtension: method, apiType: apiType))
-        request.httpMethod = "DELETE"
+        request.httpMethod = (methodHttp?.getVerb())!
         
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared
@@ -297,6 +303,26 @@ class HTTPCLient : NSObject {
         case udacity
         case parse
     }
+
+
+    // MARK: - Methods used in HTTP Requests
+    
+    enum HTTPMethod {
+        case get,post,put,delete
+        func getVerb() -> String {
+            switch self{
+            case .get:
+                return "GET"
+            case .post:
+                return "POST"
+            case .put:
+                return "PUT"
+            case .delete:
+                return "DELETE"
+            }
+        }
+    }
+
     
     // create a URL from parameters
     private func buildURLFromParameters(_ parameters: [String:AnyObject], withPathExtension: String? = nil, apiType: APIType = .udacity) -> URL {
