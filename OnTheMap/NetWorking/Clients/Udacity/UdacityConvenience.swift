@@ -21,7 +21,7 @@ extension UdacityClient {
         let jsonData = String(data:jsonBody, encoding: .utf8)!
         let urlPath = UdacityClient.UdacityMethods.Authentication
         
-        _ = HTTPCLient.shared().taskForPostMethod(
+        _ = HTTPCLient.shared().taskForPostOrPutMethod(
             url:urlPath,
             jsonBody:jsonData,
             parameters: [:],

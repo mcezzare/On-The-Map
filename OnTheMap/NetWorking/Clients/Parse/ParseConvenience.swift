@@ -59,26 +59,34 @@ extension ParseClient {
     func  postStudentLocation(location:Location,completionHandler:@escaping(_ success: Bool, _ errorString: String?) -> Void){
         
         // Build json body of request
+        
         /* Can't be done in this way because can't post the field objectId
          * Have to build a string in Json format and don't pass this field
          let encoder = JSONEncoder()
          let jsonBody = try! encoder.encode(location)
          let jsonData = String(data:jsonBody, encoding: .utf8)!
          */
-        
         let jsonBody = "{\"uniqueKey\": \"\(location.uniqueKey!)\", \"firstName\": \"\(location.firstName!)\", \"lastName\": \"\(location.lastName!)\",\"mapString\": \"\(location.mapString!)\", \"mediaURL\": \"\(location.mediaURL!)\",\"latitude\": \(location.latitude!), \"longitude\": \(location.longitude!)}"
-        
         
         //        print(jsonBody)
         
-        let urlPath = ParseClient.ParseMethods.StudentLocation
+        var urlPath = ParseClient.ParseMethods.StudentLocation
+        var httpMethodToUse = HTTPCLient.HTTPMethod.post
         
-        _ = HTTPCLient.shared().taskForPostMethod(
+        // Used do determine if is user is creating or updating a location
+        if ParseClient.sharedInstance().locationIdPosted {
+            urlPath += "/\(ParseClient.sharedInstance().currentRegisteredLocation.objectID!)"
+            httpMethodToUse = HTTPCLient.HTTPMethod.put
+        }
+        
+        
+        _ = HTTPCLient.shared().taskForPostOrPutMethod(
             url: urlPath,
             jsonBody: jsonBody,
             parameters: [:],
             requestHeaderParameters: self.parseApiHeaders,
             apiType: HTTPCLient.APIType.parse,
+            methodHttp: httpMethodToUse,
             completionHandlerForPost: { (data, error) in
                 if let error = error {
                     print(error)
@@ -87,7 +95,7 @@ extension ParseClient {
                     // Parse the response
                     do{
                         let location = try Location(data:data!)
-                        if (location.objectID != nil) {
+                        if (httpMethodToUse.getVerb() == HTTPCLient.HTTPMethod.post.getVerb() && location.objectID != nil) || (httpMethodToUse.getVerb() == HTTPCLient.HTTPMethod.put.getVerb() && location.updatedAt != nil){
                             self.currentRegisteredLocation = location
                             self.locationIdPosted = true // to confirm overwrite the location posted before
                             completionHandler(true,nil)

@@ -37,8 +37,8 @@ class HTTPCLient : NSObject {
         return Singleton.shared
     }
     
-    // MARK : Method to make post requests
-    func taskForPostMethod(
+    // MARK : Method to make post or put requests
+    func taskForPostOrPutMethod(
         url urlPath                         : String,
         jsonBody                            : String,
         parameters                          : [String:AnyObject],
@@ -66,9 +66,9 @@ class HTTPCLient : NSObject {
         }
         
         if self.appDelegate.DEBUG {
-            print("DEBUG POST INFO HEADERS")
+            print("DEBUG \(String(describing: methodHttp?.getVerb())) INFO HEADERS")
             print(request.allHTTPHeaderFields!)
-            print("DEBUG POST INFO QUERYSTRING")
+            print("DEBUG \(String(describing: methodHttp?.getVerb())) INFO QUERYSTRING")
             print(request)
         }
         
