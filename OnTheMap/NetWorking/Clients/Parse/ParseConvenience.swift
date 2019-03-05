@@ -9,17 +9,21 @@
 import Foundation
 
 extension ParseClient {
+    
+    
+    /// Get a list of students locations
+    ///
+    /// - Parameter completionHandler: an array of StudentInformation or an error object
     func getStudentsLocation(completionHandler: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void){
-        //        let params = [ParseClient.ParseMethods.StudentLocation: "-updatedAt" as AnyObject]
-        let parseApiHeaders=[
-            ParseClient.ParseParameterKeys.APIKey:ParseClient.ParseParametersValues.APIKey,
-            ParseClient.ParseParameterKeys.ApplicationID:ParseClient.ParseParametersValues.ApplicationID
+        // Criteria of project, order by updateAt desc
+        let queryParameters = [
+            ParseClient.ParseParameterKeys.Order:ParseClient.ParseParametersValues.UpdateAtReverseOrder as AnyObject
         ]
         
         _ = HTTPCLient.shared().taskForGetMethod(
             url: ParseClient.ParseMethods.StudentLocation,
-            parameters: [:],
-            requestHeaderParameters: parseApiHeaders,
+            parameters: queryParameters,
+            requestHeaderParameters: self.parseApiHeaders,
             apiType: .parse,
             completionHandlerForGet: { (data, error) in
                 if let error = error {
@@ -47,9 +51,66 @@ extension ParseClient {
     }
     
     
+    /// Register a new location of student
+    ///
+    /// - Parameters:
+    ///   - location: a Location object build on PinViewController
+    ///   - completionHandler: escape method to inform if the operation worked
+    func  postStudentLocation(location:Location,completionHandler:@escaping(_ success: Bool, _ errorString: String?) -> Void){
+        
+        // Build json body of request
+        /* Can't be done in this way because can't post the field objectId
+         * Have to build a string in Json format and don't pass this field
+         let encoder = JSONEncoder()
+         let jsonBody = try! encoder.encode(location)
+         let jsonData = String(data:jsonBody, encoding: .utf8)!
+         */
+        
+        let jsonBody = "{\"uniqueKey\": \"\(location.uniqueKey!)\", \"firstName\": \"\(location.firstName!)\", \"lastName\": \"\(location.lastName!)\",\"mapString\": \"\(location.mapString!)\", \"mediaURL\": \"\(location.mediaURL!)\",\"latitude\": \(location.latitude!), \"longitude\": \(location.longitude!)}"
+        
+        
+        //        print(jsonBody)
+        
+        let urlPath = ParseClient.ParseMethods.StudentLocation
+        
+        _ = HTTPCLient.shared().taskForPostMethod(
+            url: urlPath,
+            jsonBody: jsonBody,
+            parameters: [:],
+            requestHeaderParameters: self.parseApiHeaders,
+            apiType: HTTPCLient.APIType.parse,
+            completionHandlerForPost: { (data, error) in
+                if let error = error {
+                    print(error)
+                    completionHandler(false,error.localizedDescription)
+                } else {
+                    // Parse the response
+                    do{
+                        let location = try Location(data:data!)
+                        if (location.objectID != nil) {
+                            self.currentRegisteredLocation = location
+                            completionHandler(true,nil)
+                        }else {
+                            self.currentRegisteredLocation = nil
+                            completionHandler(false,"Não foi possível registrar a localização.")
+                        }
+                    }
+                    catch{
+                        print("Houve um erro ao gravar os dados de localização.")
+                        completionHandler(false,"Houve um erro ao gravar os dados de localização.")
+                    }
+                }
+        })
+        
+    }
     
     // MARK: Helpers to decode json responses.Could be done with codable too =(
     
+    /// Function to parse Response data of requests
+    ///
+    /// - Parameters:
+    ///   - data: normally json response of APIs
+    ///   - completionHandlerForConvertData: a data with json format or an error
     private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
         var parsedResult: AnyObject! = nil

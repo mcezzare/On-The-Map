@@ -25,7 +25,13 @@ extension UIViewController {
         }
     }
     
-    // MARK: Show alert dialog
+    
+    /// Show an alert dialog
+    ///
+    /// - Parameters:
+    ///   - theTitle: Title from alert message
+    ///   - theMessage: text message to appear
+    ///   - action: here only OK option
     func showInfoAlert(theTitle: String = "Info", theMessage: String, action: (() -> Void)? = nil) {
         performUIUpdatesOnMain {
             let alertViewControler = UIAlertController(title: theTitle, message: theMessage, preferredStyle: .alert)
@@ -37,9 +43,13 @@ extension UIViewController {
     }
     
     // MARK: Open external links with Safari
+    
+    /// Open external links with Safari
+    ///
+    /// - Parameter url: a string that must be valid URL
     func openWithSafari(_ url: String) {
         guard let url = URL(string: url), UIApplication.shared.canOpenURL(url) else {
-            showInfoAlert(theMessage: "Invalid Url.")
+            showInfoAlert(theMessage: "URL Inválida.")
             return
         }
         UIApplication.shared.open(url, options: [:])
