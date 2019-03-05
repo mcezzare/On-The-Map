@@ -16,6 +16,8 @@ import Foundation
 class ParseClient: NSObject {
     
     // MARK: -  Properties
+   var locationIdPosted = false
+    
     // Will be filed after user post a new location
     var currentRegisteredLocation : Location!
     

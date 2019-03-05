@@ -89,6 +89,7 @@ extension ParseClient {
                         let location = try Location(data:data!)
                         if (location.objectID != nil) {
                             self.currentRegisteredLocation = location
+                            self.locationIdPosted = true // to confirm overwrite the location posted
                             completionHandler(true,nil)
                         }else {
                             self.currentRegisteredLocation = nil

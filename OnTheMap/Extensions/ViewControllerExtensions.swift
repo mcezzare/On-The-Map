@@ -56,5 +56,15 @@ extension UIViewController {
     }
     
     
+    func showConfirmationAlert(withMessage: String, actionTitle: String, action: @escaping () -> Void) {
+        performUIUpdatesOnMain {
+            let ac = UIAlertController(title: nil, message: withMessage, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            ac.addAction(UIAlertAction(title: actionTitle, style: .destructive, handler: { (alertAction) in
+                action()
+            }))
+            self.present(ac, animated: true)
+        }
+    }
     
 }
