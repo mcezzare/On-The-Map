@@ -36,9 +36,11 @@ class PinViewController : BaseMapViewController {
     @IBAction func finishPostLocationButtonPressed(){
         activityIndicator.startAnimating()
         enableUIControls(false)
+        
         guard let location = buildLocationFromStudentInformation(studentInformation: self.studentInformation) else {
             activityIndicator.stopAnimating()
             enableUIControls(true)
+            
             showInfoAlert(theTitle: "Erro", theMessage: "Não é possível usar a localização informada.")
             return
         }
@@ -131,8 +133,15 @@ class PinViewController : BaseMapViewController {
     // MARK: Call UIViewController Extension to lock UI Itens
     private func enableUIControls(_ enable: Bool){
         self.enableUIItens(views: finishPostLocationButton, enable:enable)
+        //        enable == true ? self.mapView.alpha = 1 : self.mapView.alpha = 0.5 // don't work in this way
+        if enable {
+            self.mapView.alpha = 1
+        } else {
+            self.mapView.alpha = 0.5
+        }
+        
     }
-
+    
     
 }
 

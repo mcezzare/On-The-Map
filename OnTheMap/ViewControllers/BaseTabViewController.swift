@@ -65,5 +65,55 @@ class BaseTabViewController : UITabBarController {
             
         }
     }
+    
+    @IBAction func postLocationButtonPressed(_ sender: Any){
+        self.enableUIControls(false)
+
+        if ParseClient.sharedInstance().locationIdPosted  {
+            let confirmMsg = "Você já informou sua localização anteriormente. Deseja atualizar sua nova localização?"
+            self.showConfirmationAlert(withMessage: confirmMsg, actionTitle: "Reescrever", action: {
+                self.showPostingView()
+            })
+        } else {
+            self.showPostingView()
+            
+        }
+//        if ParseClient.sharedInstance().currentRegisteredLocation.objectID != nil {
+//            let confirmMsg = "Você já informou sua localização anteriormente. Deseja atualizar sua nova localização?"
+//            self.showConfirmationAlert(withMessage: confirmMsg, actionTitle: "Reescrever", action: {
+//                self.showPostingView()
+//            })
+//        } else {
+//            self.showPostingView()
+//        }
+        
+        self.enableUIControls(true)
+    
+    }
+    
+    //MARK: - Segues
+    
+    private func showPostingView(){
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "PostLocationView") as! PostViewController
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+   
+    
+    // MARK: - Helpers
+    private func enableUIControls(_ enable: Bool) {
+        performUIUpdatesOnMain {
+            self.postLocationButton.isEnabled = enable
+            self.reloadStudentsLocationsButton.isEnabled = enable
+            self.logOutButton.isEnabled = enable
+        }
+    }
+    
+    // This segue is configured at the Map Storyboard
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // alert appears after the segue happens
+//        if segue.identifier == "addLocation"{
+//            self.showInfoAlert(theMessage: "Going to segue add Location")
+//        }
+//    }
 }
 

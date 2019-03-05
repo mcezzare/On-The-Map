@@ -13,8 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    // Make it true to increase verbose on requests and sections that are not finished
-    var DEBUG = true
+    // Make it true to increase verbose on requests and make easier to troubleshooting
+    var DEBUG = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
