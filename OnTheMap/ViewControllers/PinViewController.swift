@@ -31,6 +31,12 @@ class PinViewController : BaseMapViewController {
         showStudentLocation()
     }
     
+    // MARK: - Actions
+    
+    @IBAction func finishPostLocationButtonPressed(){
+        
+    }
+    
     
     // MARK: - Functions
     
@@ -83,6 +89,8 @@ class PinViewController : BaseMapViewController {
         }
         return nil
     }
+    
+
     
 }
 

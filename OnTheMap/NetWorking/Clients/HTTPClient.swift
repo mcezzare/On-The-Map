@@ -298,6 +298,12 @@ class HTTPCLient : NSObject {
         components.scheme = apiType == .udacity ? UdacityClient.UdacityService.APIScheme : ParseClient.ParseService.APIScheme
         components.host = apiType == .udacity ? UdacityClient.UdacityService.APIHost : ParseClient.ParseService.APIHost
         components.path = (apiType == .udacity ? UdacityClient.UdacityService.APIPath : ParseClient.ParseService.APIPath) + (withPathExtension ?? "")
+        // I had to do it because the parse API was broken, and I had to setup a local Parse Server
+        if apiType == .parse {
+                components.port = ParseClient.ParseService.APIPort
+        }
+        
+        
         components.queryItems = [URLQueryItem]()
         
         for (key, value) in parameters {
