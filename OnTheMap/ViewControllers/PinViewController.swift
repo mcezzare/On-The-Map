@@ -34,7 +34,32 @@ class PinViewController : BaseMapViewController {
     // MARK: - Actions
     
     @IBAction func finishPostLocationButtonPressed(){
+        activityIndicator.startAnimating()
+        enableUIControls(false)
+        guard let location = buildLocationFromStudentInformation(studentInformation: self.studentInformation) else {
+            activityIndicator.stopAnimating()
+            enableUIControls(true)
+            showInfoAlert(theTitle: "Erro", theMessage: "Não é possível usar a localização informada.")
+            return
+        }
         
+        ParseClient.sharedInstance().postStudentLocation(location:location){ (success,errorMesage) in
+            if success {
+                self.showInfoAlert(theTitle: "Sucesso", theMessage: "Localização atualizada", action: {
+                    self.navigationController?.popToRootViewController(animated: true)
+                    NotificationCenter.default.post(name: .reload, object:nil)
+                })
+            } else {
+                self.performUIUpdatesOnMain {
+                    self.showInfoAlert(theTitle: "Erro", theMessage: errorMesage!)
+                }
+            }
+            self.performUIUpdatesOnMain {
+                self.activityIndicator.stopAnimating()
+                self.enableUIControls(true)
+            }
+            
+        }
     }
     
     
@@ -43,21 +68,8 @@ class PinViewController : BaseMapViewController {
     
     /// Show the location sent by PostViewController
     private func showStudentLocation(){
-        if let studentLocation = studentInformation {
-            let location = Location(
-                objectId: "",
-                uniqueKey: nil,
-                firstName: studentLocation.firstName,
-                lastName: studentLocation.lastName,
-                mapString: studentLocation.mapString,
-                mediaURL: studentLocation.mediaURL,
-                latitude: studentLocation.latitude,
-                longitude: studentLocation.longitude,
-                createdAt: "",
-                updatedAt: ""
-            )
-            showLocation(location:location)
-        }
+        let location = buildLocationFromStudentInformation(studentInformation: self.studentInformation)
+        showLocation(location:location!)
     }
     
     // MARK: - Helpers
@@ -90,6 +102,36 @@ class PinViewController : BaseMapViewController {
         return nil
     }
     
+    
+    /// Build a Location object based on a StudentIformation struct
+    ///
+    /// - Parameter studentInformation: StudentInformation created with Address String created on PostViewController
+    /// - Returns: a Location Object
+    func buildLocationFromStudentInformation(studentInformation : StudentInformation?) -> Location? {
+        if let studentLocation = studentInformation {
+            let location = Location(
+                objectID: "",
+                uniqueKey: UdacityClient.sharedInstance().udacityUser.key,
+                firstName: studentLocation.firstName,
+                lastName: studentLocation.lastName,
+                mapString: studentLocation.mapString,
+                mediaURL: studentLocation.mediaURL,
+                latitude: studentLocation.latitude,
+                longitude: studentLocation.longitude,
+                createdAt: "",
+                updatedAt: ""
+            )
+            return location
+        }
+        
+        return nil
+        
+    }
+    
+    // MARK: Call UIViewController Extension to lock UI Itens
+    private func enableUIControls(_ enable: Bool){
+        self.enableUIItens(views: finishPostLocationButton, enable:enable)
+    }
 
     
 }

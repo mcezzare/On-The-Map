@@ -15,8 +15,15 @@ import Foundation
 
 class ParseClient: NSObject {
     
-    // MARK: Properties
-//    var studentsLocation : StudentsLocation!
+    // MARK: -  Properties
+    // Will be filed after user post a new location
+    var currentRegisteredLocation : Location!
+    
+    // Authentication Headers for this service
+    let parseApiHeaders = [
+        ParseClient.ParseParameterKeys.APIKey:ParseClient.ParseParametersValues.APIKey,
+        ParseClient.ParseParameterKeys.ApplicationID:ParseClient.ParseParametersValues.ApplicationID
+    ]
     
     // MARK: Singleton, Shared Instance
     class func sharedInstance()->ParseClient{

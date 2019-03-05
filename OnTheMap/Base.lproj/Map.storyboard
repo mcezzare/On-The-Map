@@ -256,6 +256,9 @@
                                 <state key="normal" title="Finalizar">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="finishPostLocationButtonPressed" destination="yx4-7k-K3n" eventType="touchUpInside" id="Uuk-Bc-3CN"/>
+                                </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="r3V-lJ-awn">
                                 <rect key="frame" x="177" y="333.5" width="20" height="20"/>

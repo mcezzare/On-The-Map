@@ -64,6 +64,13 @@ class HTTPCLient : NSObject {
             }
         }
         
+        if self.appDelegate.DEBUG {
+            print("DEBUG POST INFO HEADERS")
+            print(request.allHTTPHeaderFields!)
+            print("DEBUG POST INFO QUERYSTRING")
+            print(request)
+        }
+        
         /* 4. Make the request */
         let task = session.dataTask(with: request  as URLRequest) { data, response, error in
             func sendError(_ error: String) {
@@ -143,9 +150,9 @@ class HTTPCLient : NSObject {
         }
         
         if self.appDelegate.DEBUG {
-            print("DEBUG INFO HEADERS")
+            print("DEBUG GET INFO HEADERS")
             print(request.allHTTPHeaderFields!)
-            print("DEBUG INFO QUERYSTRING")
+            print("DEBUG GET INFO QUERYSTRING")
             print(request)
         }
         
@@ -299,9 +306,9 @@ class HTTPCLient : NSObject {
         components.host = apiType == .udacity ? UdacityClient.UdacityService.APIHost : ParseClient.ParseService.APIHost
         components.path = (apiType == .udacity ? UdacityClient.UdacityService.APIPath : ParseClient.ParseService.APIPath) + (withPathExtension ?? "")
         // I had to do it because the parse API was broken, and I had to setup a local Parse Server
-        if apiType == .parse {
-                components.port = ParseClient.ParseService.APIPort
-        }
+        //        if apiType == .parse {
+        //                components.port = ParseClient.ParseService.APIPort
+        //        }
         
         
         components.queryItems = [URLQueryItem]()
@@ -322,6 +329,6 @@ class HTTPCLient : NSObject {
             UIApplication.shared.isNetworkActivityIndicatorVisible = show
         }
     }
-
+    
     
 }

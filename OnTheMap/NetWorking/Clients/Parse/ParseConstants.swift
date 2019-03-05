@@ -11,15 +11,15 @@ import Foundation
 extension ParseClient {
     
     struct ParseService {
-//        static let APIScheme = "https"
-//        static let APIHost = "parse.udacity.com"
-//        static let APIPath = "/parse"
-        /* I had to do it because the parse API was broken at Mon Mar  4 23:32:01 -03 2019, and I had to setup a local Parse Server */
-        static let APIScheme = "http"
-        static let APIHost = "192.168.15.21"
+        static let APIScheme = "https"
+        static let APIHost = "parse.udacity.com"
         static let APIPath = "/parse"
-        static let APIPort = 1337
-
+        /* I had to do it because the parse API was broken at Mon Mar  4 23:32:01 -03 2019, and I had to setup a local Parse Server */
+        //        static let APIScheme = "http"
+        //        static let APIHost = "192.168.15.21"
+        //        static let APIPath = "/parse"
+        //        static let APIPort = 1337
+        
     }
     
     struct ParseMethods {
