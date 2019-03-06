@@ -19,14 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Make it true to increase verbose on requests and make easier to troubleshooting
     var DEBUG = false
 
-    // defaults
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        // Override point for customization after application launch.
-//        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-//        return true
-//
-//    }
-    // WORKS
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         return true

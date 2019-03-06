@@ -137,7 +137,6 @@ extension UdacityClient {
     
     
     
-//    authenticateFacebookUser
     func authenticateFacebookUser(accessToken: String, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
         // Build Json body of request
@@ -159,8 +158,6 @@ extension UdacityClient {
                     completionHandlerForAuth(false, error.localizedDescription)
                 } else {
                     
-                    // work on data result
-                    // print("Request Worked")
                     do {
                         let userSession = try UserSession(data: data!)
                         if !userSession.account.registered {
