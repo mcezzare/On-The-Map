@@ -6,9 +6,9 @@ target 'OnTheMap' do
   use_frameworks!
 
   # Pods for OnTheMap
-	pod 'FacebookCore'
-	pod 'FacebookLogin'
-
+ 	pod 'FBSDKLoginKit'
+  pod 'FBSDKCoreKit'
+  
   target 'OnTheMapTests' do
     inherit! :search_paths
     # Pods for testing

@@ -307,7 +307,6 @@
 				AA28337B5FFC06F860B1459A /* Pods-OnTheMapUITests.debug.xcconfig */,
 				8D442DF10544556050E1EF0F /* Pods-OnTheMapUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -461,15 +460,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-OnTheMapTests-checkManifestLockResult.txt",
 			);
@@ -483,15 +478,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-OnTheMap-checkManifestLockResult.txt",
 			);
@@ -505,25 +496,17 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OnTheMap/Pods-OnTheMap-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -535,15 +518,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-OnTheMapUITests-checkManifestLockResult.txt",
 			);
@@ -762,6 +741,34 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mcezzare.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -777,6 +784,34 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mcezzare.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController,UITextFieldDelegate {
     
@@ -17,6 +19,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var facebookLoginButton: UIButton!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -24,6 +27,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         loginButton.makeRoundedCorners()
         signUpButton.makeRoundedCorners()
+//        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
+//        loginButton.center = view.center
+//
+//        view.addSubview(loginButton)
     }
     
     // MARK: Actions
@@ -103,6 +110,50 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
          let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "secondViewController")
          self.present(navigationManagerController, animated: true, completion: nil)
          */
+    }
+    
+    // MARK: - Facebook Methods
+    
+    @IBAction func signInWithFacebook(sender: AnyObject) {
+        if (FBSDKAccessToken.current() != nil) {
+            //user has already a token
+            let ctoken = FBSDKAccessToken.current()
+            loginWithFacebook(accessToken: ctoken?.tokenString)
+        } else {
+            let facebookmanager = FBSDKLoginManager()
+                facebookmanager.logIn(withReadPermissions: ["email"], handler: { (loginResult: FBSDKLoginManagerLoginResult!, error) -> Void in
+                if let _ = error {
+                    print("login with facebook failed")
+                }else {
+                    let accesstokenobject = loginResult.token
+                    let tokenString  = accesstokenobject?.tokenString
+                    print("token string is \(tokenString!)")
+                    self.loginWithFacebook(accessToken: tokenString)
+                }
+            })
+        }
+    }
+    
+    func loginWithFacebook(accessToken: String!) {
+
+//        client.loginWithFacebook(accessToken, completionHandler: { (success, sessionID, errorString) -> Void in
+//            if let err = errorString {
+//                print("erroris \(err.localizedDescription)\n")
+//                MOHUD.showWithError(err.localizedDescription)
+//            } else {
+//                if (sessionID != nil) {
+//                    // go to tabController
+//                    OTMUdacityClient.sharedInstance().sessionID = sessionID
+//                    self.presentTheLocationsViewController()
+//                    print("session id is \(sessionID)")
+//
+//                }else {
+//                    print("errorloginface \(errorString?.localizedDescription)")
+//
+//                }
+//            }
+//
+//        })
     }
     
 }

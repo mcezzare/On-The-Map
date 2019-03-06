@@ -100,10 +100,16 @@
                                             <constraint firstAttribute="height" constant="30" id="HV2-4i-TXw"/>
                                         </constraints>
                                     </activityIndicatorView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVZ-vu-Vt0">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhd-Vm-zLV">
                                         <rect key="frame" x="0.0" y="195" width="314" height="45"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
+                                        <color key="backgroundColor" red="0.0060737514868378639" green="0.5832783579826355" blue="0.74586737155914307" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Login with Facebook">
+                                            <color key="titleColor" red="0.94104565559999998" green="1" blue="0.95575676620000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signInWithFacebookWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HF5-p9-a0O"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
