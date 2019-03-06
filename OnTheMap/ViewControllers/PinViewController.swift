@@ -22,8 +22,7 @@ class PinViewController : BaseMapViewController {
     // MARK: - Properties
     var studentInformation: StudentInformation?
     
-    // MARK: - UIViewController lifecycle
-    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         finishPostLocationButton.makeRoundedCorners()
@@ -73,8 +72,6 @@ class PinViewController : BaseMapViewController {
         let location = buildLocationFromStudentInformation(studentInformation: self.studentInformation)
         showLocation(location:location!)
     }
-    
-    // MARK: - Helpers
     
     /// Draw on the mapView the location informed by the student
     ///
@@ -130,6 +127,8 @@ class PinViewController : BaseMapViewController {
         
     }
     
+    // MARK: - Helpers
+    
     // MARK: Call UIViewController Extension to lock UI Itens
     private func enableUIControls(_ enable: Bool){
         self.enableUIItens(views: finishPostLocationButton, enable:enable)
@@ -142,6 +141,4 @@ class PinViewController : BaseMapViewController {
         
     }
     
-    
 }
-

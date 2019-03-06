@@ -10,7 +10,14 @@ import Foundation
 
 extension UdacityClient {
     
+    // MARK: - Auth / Login Methods
     
+    /// Authenticate a udacity user
+    ///
+    /// - Parameters:
+    ///   - userEmail: login of user
+    ///   - userPassword: password of user
+    ///   - completionHandlerForAuth: returns **true** in case it succeeds or **false** and the given error in case of failure.
     func authenticateUser(userEmail: String, userPassword: String, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
         // Build Json body of request
@@ -31,9 +38,7 @@ extension UdacityClient {
                     print(error)
                     completionHandlerForAuth(false, error.localizedDescription)
                 } else {
-                    
                     // work on data result
-                    // print("Request Worked")
                     do {
                         let userSession = try UserSession(data: data!)
                         if !userSession.account.registered {
@@ -52,91 +57,11 @@ extension UdacityClient {
         })
     }
     
-    
-    /// Logout the current user and destroy the session based on Cookie from Login
+    /// Authenticate a user from facebook
     ///
-    /// - Parameter completionHandlerForLogout: return **true** if works and **false** on fail and describes the error
-    func logout(completionHandlerForLogout: @escaping (_ success: Bool, _ error: Error?) -> Void){
-        let urlPath = UdacityClient.UdacityMethods.Authentication
-        _ = HTTPCLient.shared().taskForDeleteMethod(
-            urlPath,
-            parameters: [:],
-            completionHandlerForDelete:{ (data,error) in
-                if let error = error {
-                    print(error)
-                    completionHandlerForLogout(false,error)
-                } else {
-                    
-                    let sessionData = self.parseSession(data: data)
-                    print(sessionData)
-                    if let _ = sessionData.0 {
-                        self.userSession = nil
-                        completionHandlerForLogout(true, nil)
-                    } else {
-                        completionHandlerForLogout(false, sessionData.1!)
-                    }
-                }
-                
-        }
-        )
-    }
-    
-    
-    // MARK : Get info about Student after login
-    func getStudentInfo(completionHandler: @escaping(_ result:UdacityUser?, _ error:String?) -> Void){
-        
-        let urlPath = UdacityClient.UdacityMethods.Users + "/" + self.userSession.account.key
-        
-        _ = HTTPCLient.shared().taskForGetMethod(
-            url: urlPath,
-            parameters: [:],
-            completionHandlerForGet: { (data,error) in
-                if let error = error {
-                    print(error)
-                    completionHandler(nil,error.localizedDescription)
-                } else {
-                    do{
-                        let udacityUser = try UdacityUser(data: data!)
-                        self.udacityUser = udacityUser
-                        completionHandler(udacityUser,nil)
-                    }
-                    catch{
-                        print("Could not read user details")
-                        completionHandler(nil, "Could not read user details")
-                    }
-                }
-        }
-        )
-        
-    }
-    
-    
-    
-    /// Prepare data from user Session. Used only to logout the current Udacity user
-    ///
-    /// - Parameter data: Struct Session from udacity api
-    /// - Returns: The Session struct without the **account** json node from login
-    func parseSession(data: Data?) -> (Session?, Error?) {
-        var sessionData: (session: Session?, error: Error?) = (nil, nil)
-        do {
-            
-            struct SessionData: Codable {
-                let session: Session
-            }
-            
-            if let data = data {
-                let jsonDecoder = JSONDecoder()
-                sessionData.session = try jsonDecoder.decode(SessionData.self, from: data).session
-            }
-        } catch {
-            print(error)
-            sessionData.error = error
-        }
-        return sessionData
-    }
-    
-    
-    
+    /// - Parameters:
+    ///   - accessToken: accessToken string returned by FB OAuth Service
+    ///   - completionHandlerForAuth: returns **true** in case it succeeds or **false** and the given error in case of failure.
     func authenticateFacebookUser(accessToken: String, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
         // Build Json body of request
@@ -175,4 +100,95 @@ extension UdacityClient {
                 }
         })
     }
+    
+    // MARK: - Logout Method
+    
+    /// Logout the current user and destroy the session based on Cookie from Login
+    ///
+    /// - Parameter completionHandlerForLogout: return **true** if works and **false** on fail and describes the error
+    func logout(completionHandlerForLogout: @escaping (_ success: Bool, _ error: Error?) -> Void){
+        let urlPath = UdacityClient.UdacityMethods.Authentication
+        _ = HTTPCLient.shared().taskForDeleteMethod(
+            urlPath,
+            parameters: [:],
+            completionHandlerForDelete:{ (data,error) in
+                if let error = error {
+                    print(error)
+                    completionHandlerForLogout(false,error)
+                } else {
+                    
+                    let sessionData = self.parseSession(data: data)
+
+                    if let _ = sessionData.0 {
+                        self.userSession = nil
+                        completionHandlerForLogout(true, nil)
+                    } else {
+                        completionHandlerForLogout(false, sessionData.1!)
+                    }
+                }
+                
+        }
+        )
+    }
+    
+    
+    // MARK: - Information Methods
+    
+    /// Get info about Student after login
+    ///
+    /// - Parameter completionHandler: returns **UdacityUser** in case it succeeds or **false** and the given error in case of failure.
+    func getStudentInfo(completionHandler: @escaping(_ result:UdacityUser?, _ error:String?) -> Void){
+        
+        let urlPath = UdacityClient.UdacityMethods.Users + "/" + self.userSession.account.key
+        
+        _ = HTTPCLient.shared().taskForGetMethod(
+            url: urlPath,
+            parameters: [:],
+            completionHandlerForGet: { (data,error) in
+                if let error = error {
+                    print(error)
+                    completionHandler(nil,error.localizedDescription)
+                } else {
+                    do{
+                        let udacityUser = try UdacityUser(data: data!)
+                        self.udacityUser = udacityUser
+                        completionHandler(udacityUser,nil)
+                    }
+                    catch{
+                        print("Could not read user details")
+                        completionHandler(nil, "Could not read user details")
+                    }
+                }
+        }
+        )
+        
+    }
+    
+    // MARK: - Helpers
+    
+    /// Prepare data from user Session. Used only to logout the current Udacity user
+    ///
+    /// - Parameter data: Struct Session from udacity api
+    /// - Returns: The Session struct without the **account** json node from login
+    func parseSession(data: Data?) -> (Session?, Error?) {
+        var sessionData: (session: Session?, error: Error?) = (nil, nil)
+        do {
+            
+            struct SessionData: Codable {
+                let session: Session
+            }
+            
+            if let data = data {
+                let jsonDecoder = JSONDecoder()
+                sessionData.session = try jsonDecoder.decode(SessionData.self, from: data).session
+            }
+        } catch {
+            print(error)
+            sessionData.error = error
+        }
+        return sessionData
+    }
+    
+    
 }
+

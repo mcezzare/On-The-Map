@@ -9,6 +9,6 @@
 import Foundation
 
 struct Constants {
-
+    
     static let UdacityUrlSignUp = "https://auth.udacity.com/sign-up"
 }

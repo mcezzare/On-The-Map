@@ -26,7 +26,7 @@ extension ParseClient {
         static let StudentLocation = "/classes/StudentLocation"
     }
     
-    // wil be replaced by codable structs, if possible
+    // Will be replaced by codable structs, if possible
     struct ParseJSONResponseKeys {
         static let Results = "results"
     }

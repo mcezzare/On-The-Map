@@ -1,18 +1,20 @@
 # On The Map
 
-3º project from the udacity nanodegree course
+3º project from the Udacity nanodegree course.
 
-The On The Map application allows users to share their location and URL with other students.
+The OnTheMap application allows Udacity students to share their location and a URL with other students.
 
-To view this data, the On The Map application uses a map with location tags and tag annotations for student names and URLs, which allows students to "position themselves on the map".
+To view this data, the OnTheMap application uses a map with pins with tags annotations for student names and URLs, which allows students to "position themselves on the map".
 
-First, the user logs in to the app using their Udacity username and password or Facebook Account
+First, the user logs in to the app using their Udacity username and password or Facebook Account.
 
 After login, the app downloads locations and links previously posted by other students. These links can point to any URL that a student shares. After viewing the information posted by other students, a user can post their own location and link. The locations are specified with a string and forward geocoded. They can be as specific as a full street address or as generic as "Brazil, São Paulo Atibaia"
 
 ## Running Project
 
 Clone the project
+
+* Note. Dependencies are only used to logging with Facebook. All sections use native functions of Swift 4.
 
 Install dependencies
 
@@ -94,3 +96,13 @@ gem install cocoapods
 ```
 
 6 - Back to [Running Project](#Running-Project)
+
+## Requirements
+
+* A valid and active Udacity Account
+* Xcode 9.2
+
+### Background Services
+
+* Udacity API: for login and get Student Information
+* Parse Server: for keep the location of Users

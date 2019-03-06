@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+/// Struct to keep the list of Students in Parse Service
 struct StudentsLocation {
     
     static var shared = StudentsLocation()

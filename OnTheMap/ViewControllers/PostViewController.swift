@@ -20,8 +20,10 @@ class PostViewController : UIViewController {
     // MARK: - Properties
     lazy var geoCoder = CLGeocoder()
     
+    // MARK : Access the debug on delegate property, used to debug the App and see requests and responses
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         findLocationButton.makeRoundedCorners()
@@ -120,15 +122,19 @@ class PostViewController : UIViewController {
         
     }
     
+    // MARK: - Helpers
+    
     // MARK: Configure the navbar
     
     /// Pre-Requisite of project is the back button must have the title "Cancel"
     private func configureNavBar(){
-        self.navigationItem.title = "Adicionar localização"
-        
-        let backButton = UIBarButtonItem()
-        backButton.title = "Cancelar"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        performUIUpdatesOnMain {
+            self.navigationItem.title = "Adicionar localização"
+            let backButton = UIBarButtonItem()
+            backButton.title = "Cancelar"
+            self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
+        }
     }
     
     

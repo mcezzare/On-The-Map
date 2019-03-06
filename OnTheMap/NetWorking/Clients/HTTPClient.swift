@@ -10,17 +10,12 @@ import Foundation
 import UIKit
 
 class HTTPCLient : NSObject {
-    // MARK : Properties
     
-    // MARK :
+    // MARK: - Properties
+    
     var session = URLSession.shared
     
-    // authentication state will be moved to the correct class
-    //    var sessionID: String? = nil
-    //    var userKey = ""
-    //    var userName = ""
-    
-    // MARK : Access the debug on delegate property
+    // MARK : Access the debug on delegate property, used to debug the App and see requests and responses
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // MARK: Initializers
@@ -37,7 +32,21 @@ class HTTPCLient : NSObject {
         return Singleton.shared
     }
     
-    // MARK : Method to make post or put requests
+    // MARK: - Request Methods
+    
+    // MARK: POST or PUT
+    
+    /// Method to make post or put http requests
+    ///
+    /// - Parameters:
+    ///   - urlPath: url of request
+    ///   - jsonBody: json body of the request
+    ///   - parameters: main method of rest api and any additional parameters to use on QueryString
+    ///   - httpHeaders: additional headers, auth, content-type, etc.
+    ///   - apiType: which api to use for the request
+    ///   - methodHttp: verb http to use POST or PUT
+    ///   - completionHandlerForPost: the escaping function returns **Data** in case it succeeds or **NSError** in case of failure.
+    /// - Returns: URLSessionDataTask
     func taskForPostOrPutMethod(
         url urlPath                         : String,
         jsonBody                            : String,
@@ -129,7 +138,18 @@ class HTTPCLient : NSObject {
         
     }
     
-    // MARK : Method to make post requests
+    // MARK: GET
+    
+    /// Method to make get http requests
+    ///
+    /// - Parameters:
+    ///   - urlPath: url of request
+    ///   - parameters: main method of rest api and any additional parameters to use on QueryString
+    ///   - httpHeaders: additional headers, auth, content-type, etc.
+    ///   - apiType: which api to use for the request
+    ///   - methodHttp: verb http to use GET
+    ///   - completionHandlerForGet: the escaping function returns **Data** in case it succeeds or **NSError** in case of failure.
+    /// - Returns: <#return value description#>
     func taskForGetMethod(
         url urlPath                         : String,
         parameters                          : [String:AnyObject],
@@ -217,15 +237,25 @@ class HTTPCLient : NSObject {
         
     }
     
-    // MARK: Method to make DELETE requests
+    // MARK: DELETE
+    
+    /// Method to make delete requests
+    ///
+    /// - Parameters:
+    ///   - urlPath: url of request
+    ///   - parameters: main method of rest api and any additional parameters to use on QueryString
+    ///   - apiType: which api to use for the request
+    ///   - methodHttp: verb http to use POST or PUT
+    ///   - completionHandlerForDelete: the escaping function returns **Data** in case it succeeds or **NSError** in case of failure.
+    /// - Returns: URLSessionDataTask
     func taskForDeleteMethod(
-        _ method                   : String,
+        _ urlPath                   : String,
         parameters                 : [String:AnyObject],
         apiType                    : APIType = .udacity,
         methodHttp                 : HTTPMethod? = .delete,
         completionHandlerForDelete : @escaping (_ result: Data?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
-        let request = NSMutableURLRequest(url: buildURLFromParameters(parameters, withPathExtension: method, apiType: apiType))
+        let request = NSMutableURLRequest(url: buildURLFromParameters(parameters, withPathExtension: urlPath, apiType: apiType))
         request.httpMethod = (methodHttp?.getVerb())!
         
         var xsrfCookie: HTTPCookie? = nil
@@ -294,17 +324,13 @@ class HTTPCLient : NSObject {
     }
     
     
-    
-    
-    
     // MARK: - Apis used in this project
     
     enum APIType {
         case udacity
         case parse
     }
-
-
+    
     // MARK: - Methods used in HTTP Requests
     
     enum HTTPMethod {
@@ -322,16 +348,23 @@ class HTTPCLient : NSObject {
             }
         }
     }
-
     
-    // create a URL from parameters
+    // MARK: - Helpers
+    
+    /// Create a URL from parameters
+    ///
+    /// - Parameters:
+    ///   - parameters: main method of rest api and any additional parameters to use on QueryString
+    ///   - withPathExtension: params of QueryString
+    ///   - apiType: which api to use for the request
+    /// - Returns: a ready to use and valid URL
     private func buildURLFromParameters(_ parameters: [String:AnyObject], withPathExtension: String? = nil, apiType: APIType = .udacity) -> URL {
         
         var components = URLComponents()
         components.scheme = apiType == .udacity ? UdacityClient.UdacityService.APIScheme : ParseClient.ParseService.APIScheme
         components.host = apiType == .udacity ? UdacityClient.UdacityService.APIHost : ParseClient.ParseService.APIHost
         components.path = (apiType == .udacity ? UdacityClient.UdacityService.APIPath : ParseClient.ParseService.APIPath) + (withPathExtension ?? "")
-        // I had to do it because the parse API was broken, and I had to setup a local Parse Server
+        // I had to do configure a alternative port because the parse API was broken, and I had to setup a local Parse Server
         //        if apiType == .parse {
         //                components.port = ParseClient.ParseService.APIPort
         //        }
