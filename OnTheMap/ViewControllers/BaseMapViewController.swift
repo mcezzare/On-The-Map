@@ -12,6 +12,8 @@ import UIKit
 import MapKit
 import CoreLocation
 
+
+/// Base class for all View Controllers that use a mapView
 class BaseMapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - MKMapViewDelegate

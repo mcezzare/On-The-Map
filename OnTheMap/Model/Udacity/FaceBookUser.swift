@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+/// Struct used to login user on udacity when use Facebook Auth
 struct FaceBookUser: Codable {
     let facebookMobile: FacebookMobile?
     

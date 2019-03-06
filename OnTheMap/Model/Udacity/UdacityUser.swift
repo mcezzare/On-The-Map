@@ -5,20 +5,10 @@
 //  Created by Mario Cezzare on 12/02/19.
 //  Copyright © 2019 Mario Cezzare. All rights reserved.
 //
-// To parse the JSON, add this file to your project and do:
-//
-//   let udacityUser = try UdacityUser(json)
-//
-// To read values from URLs:
-//
-//   let task = URLSession.shared.udacityUserTask(with: url) { udacityUser, response, error in
-//     if let udacityUser = udacityUser {
-//       ...
-//     }
-//   }
-//   task.resume()
 
 import Foundation
+
+/// Struct to keep information from user of Udacity
 
 struct UdacityUser: Codable {
     let udacityUserGuard, emailPreferences: EmailPreferences
@@ -470,21 +460,4 @@ fileprivate func newJSONEncoder() -> JSONEncoder {
     return encoder
 }
 
-// MARK: - URLSession response handlers
 
-//extension URLSession {
-//    fileprivate func codableTask<T: Codable>(with url: URL, completionHandler: @escaping (T?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-//        return self.dataTask(with: url) { data, response, error in
-//            guard let data = data, error == nil else {
-//                completionHandler(nil, response, error)
-//                return
-//            }
-//            completionHandler(try? newJSONDecoder().decode(T.self, from: data), response, nil)
-//        }
-//    }
-//    
-//    func udacityUserTask(with url: URL, completionHandler: @escaping (UdacityUser?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-//        return self.codableTask(with: url, completionHandler: completionHandler)
-//    }
-//}
-//

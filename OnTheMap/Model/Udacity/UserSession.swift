@@ -148,15 +148,3 @@ fileprivate func newJSONEncoder() -> JSONEncoder {
     return encoder
 }
 
-// To parse the JSON, add this file to your project and do:
-//
-//   let userSession = try UserSession(json)
-//
-// To read values from URLs:
-//
-//   let task = URLSession.shared.userSessionTask(with: url) { userSession, response, error in
-//     if let userSession = userSession {
-//       ...
-//     }
-//   }
-//   task.resume()

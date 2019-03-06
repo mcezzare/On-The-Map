@@ -13,9 +13,11 @@ import Foundation
  * Methods defined in UdacityConvenience.swift
  */
 
+/// Client Http to use the Udacity API
 class UdacityClient: NSObject {
     
-    // MARK: Properties
+    // MARK: - Properties
+    
     var userSession : UserSession!
     var udacityUser : UdacityUser!
     var faceBookUser = false

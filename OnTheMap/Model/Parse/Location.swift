@@ -49,18 +49,18 @@ extension Location {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Location.self, from: data)
     }
-
+    
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
         }
         try self.init(data: data)
     }
-
+    
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
-
+    
     func with(
         objectID: String?? = nil,
         uniqueKey: String?? = nil,
@@ -72,7 +72,7 @@ extension Location {
         longitude: Double?? = nil,
         createdAt: String?? = nil,
         updatedAt: String?? = nil
-    ) -> Location {
+        ) -> Location {
         return Location(
             objectID: objectID ?? self.objectID,
             uniqueKey: uniqueKey ?? self.uniqueKey,
@@ -86,11 +86,11 @@ extension Location {
             updatedAt: updatedAt ?? self.updatedAt
         )
     }
-
+    
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
-
+    
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
@@ -111,38 +111,3 @@ fileprivate func newJSONEncoder() -> JSONEncoder {
     }
     return encoder
 }
-
-/*struct Location: Codable {
-    
-    let objectId: String
-    let uniqueKey: String?
-    let firstName: String?
-    let lastName: String?
-    let mapString: String?
-    let mediaURL: String?
-    let latitude: Double?
-    let longitude: Double?
-    let createdAt: String
-    let updatedAt: String?
-    
-    var locationLabel: String {
-        var name = ""
-        if let firstName = firstName {
-            name = firstName
-        }
-        if let lastName = lastName {
-            if name.isEmpty {
-                name = lastName
-            } else {
-                name += " \(lastName)"
-            }
-        }
-        if name.isEmpty {
-            name = "No name informed"
-        }
-        return name
-    }
-    
-}
-*/
-

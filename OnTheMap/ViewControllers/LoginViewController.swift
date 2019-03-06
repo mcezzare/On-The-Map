@@ -12,7 +12,7 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController,UITextFieldDelegate,FBSDKLoginButtonDelegate {
     
-    // MARK: Outlets
+    // MARK: - Outlets
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField:UITextField!
@@ -22,14 +22,16 @@ class LoginViewController: UIViewController,UITextFieldDelegate,FBSDKLoginButton
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         loginButton.makeRoundedCorners()
         signUpButton.makeRoundedCorners()
+        initializeFacebookLoogedOf()
         setupFacebookLoginButton()
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     
     @IBAction func loginButtonPressed(_ sender: AnyObject) {
         activityIndicator.startAnimating()
@@ -94,16 +96,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate,FBSDKLoginButton
         }
         
     }
-    // MARK: Call UIViewController Extension to lock UI Itens
-    private func enableUIControls(_ enable: Bool){
-        self.enableUIItens(views: emailTextField,passwordTextField,loginButton,signUpButton, enable:enable)
-    }
     
     // MARK: Send to logged start view
     
     /// Send to logged start view
     private func completeLogin() {
-        
         UdacityClient.sharedInstance().getStudentInfo(completionHandler: { (studentInfo, error) in
             if let error = error {
                 self.showInfoAlert(theTitle: "Error" , theMessage: error)
@@ -119,14 +116,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate,FBSDKLoginButton
         })
         
         performSegue(withIdentifier: "showMap", sender: nil)
-        /*
-         When debugging to check if Logged User is stored on shared instance of UdacityClient, will be removed
-         let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "secondViewController")
-         self.present(navigationManagerController, animated: true, completion: nil)
-         */
     }
     
-    // MARK: - Facebook Methods
+    // MARK: - Facebook Methods - Delegates
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
@@ -154,5 +146,22 @@ class LoginViewController: UIViewController,UITextFieldDelegate,FBSDKLoginButton
         self.view.addSubview(btnFBLogin)
     }
     
+    
+    /// It looks weird, but how its not possible to go to map view controller directly when
+    /// login with facebook , the button logout on login screen looks strange for the user that logged
+    /// with the udacity account and log off but the FBSDK is initialized on AppDelegate every time
+    private func initializeFacebookLoogedOf(){
+        if (FBSDKAccessToken.current() != nil) {
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut() // this is an instance function
+            UdacityClient.sharedInstance().faceBookUser = false
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    private func enableUIControls(_ enable: Bool){
+        self.enableUIItens(views: emailTextField,passwordTextField,loginButton,signUpButton, enable:enable)
+    }
     
 }

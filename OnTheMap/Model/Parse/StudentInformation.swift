@@ -6,9 +6,9 @@
 //  Copyright © 2019 Mario Cezzare. All rights reserved.
 //
 
-// Would be better work with codable but use this class with a init method with a dictionary is a requisite of this project.
 import Foundation
 
+/// Struct used to keep information of Student on Parse Service
 struct StudentInformation {
     
     let locationID: String?

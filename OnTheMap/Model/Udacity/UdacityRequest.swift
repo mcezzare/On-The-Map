@@ -8,8 +8,7 @@
 
 import Foundation
 
-// MARK: Structs used for login the user
-
+/// Structs used for login the user
 struct UdacityRequest: Codable {
     let udacity: Udacity
 }

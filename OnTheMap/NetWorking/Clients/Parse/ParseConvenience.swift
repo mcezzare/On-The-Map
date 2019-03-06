@@ -59,26 +59,17 @@ extension ParseClient {
     func  postStudentLocation(location:Location,completionHandler:@escaping(_ success: Bool, _ errorString: String?) -> Void){
         
         // Build json body of request
-        
-        /* Can't be done in this way because can't post the field objectId
-         * Have to build a string in Json format and don't pass this field
-         let encoder = JSONEncoder()
-         let jsonBody = try! encoder.encode(location)
-         let jsonData = String(data:jsonBody, encoding: .utf8)!
-         */
         let jsonBody = "{\"uniqueKey\": \"\(location.uniqueKey!)\", \"firstName\": \"\(location.firstName!)\", \"lastName\": \"\(location.lastName!)\",\"mapString\": \"\(location.mapString!)\", \"mediaURL\": \"\(location.mediaURL!)\",\"latitude\": \(location.latitude!), \"longitude\": \(location.longitude!)}"
-        
-        //        print(jsonBody)
         
         var urlPath = ParseClient.ParseMethods.StudentLocation
         var httpMethodToUse = HTTPCLient.HTTPMethod.post
         
+        // MARK: Here decides if use POST or PUT
         // Used do determine if is user is creating or updating a location
         if ParseClient.sharedInstance().locationIdPosted {
             urlPath += "/\(ParseClient.sharedInstance().currentRegisteredLocation.objectID!)"
             httpMethodToUse = HTTPCLient.HTTPMethod.put
         }
-        
         
         _ = HTTPCLient.shared().taskForPostOrPutMethod(
             url: urlPath,
@@ -113,7 +104,7 @@ extension ParseClient {
         
     }
     
-    // MARK: Helpers to decode json responses.Could be done with codable too =(
+    // MARK: - Helpers to decode json responses.Could be done with codable too =(
     
     /// Function to parse Response data of requests
     ///
@@ -134,6 +125,4 @@ extension ParseClient {
         completionHandlerForConvertData(parsedResult, nil)
     }
     
-    
 }
-

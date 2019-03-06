@@ -11,11 +11,15 @@ import UIKit
 
 class TableViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    // MARK: OUTLETS
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    // MARK: Lyfe cicle
+    
+    // MARK : Access the debug on delegate property, used to debug the App and see requests and responses
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -31,25 +35,6 @@ class TableViewController : UIViewController, UITableViewDataSource, UITableView
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Helpers
-    
-    @objc func reloadStarted() {
-        performUIUpdatesOnMain {
-            self.activityIndicator.startAnimating()
-        }
-    }
-    
-    @objc func reloadCompleted() {
-        performUIUpdatesOnMain {
-            self.activityIndicator.stopAnimating()
-            self.tableView.reloadData()
-        }
-    }
-    
-    // MARK:- Delegates
-    
-    // MARK : Access the debug on delegate property
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,6 +69,22 @@ class TableViewController : UIViewController, UITableViewDataSource, UITableView
         //if when back from browser the item should be not selected anymore
         //tableView.deselectRow(at: indexPath, animated: true)
     }
+
+    // MARK: - Helpers
     
+    @objc func reloadStarted() {
+        performUIUpdatesOnMain {
+            self.activityIndicator.startAnimating()
+        }
+    }
+    
+    @objc func reloadCompleted() {
+        performUIUpdatesOnMain {
+            self.activityIndicator.stopAnimating()
+            self.tableView.reloadData()
+        }
+    }
+    
+
 }
 
