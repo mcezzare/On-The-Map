@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class LoginViewController: UIViewController,UITextFieldDelegate {
+class LoginViewController: UIViewController,UITextFieldDelegate,FBSDKLoginButtonDelegate {
     
     // MARK: Outlets
     
@@ -24,6 +26,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         loginButton.makeRoundedCorners()
         signUpButton.makeRoundedCorners()
+        setupFacebookLoginButton()
     }
     
     // MARK: Actions
@@ -73,6 +76,24 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    private func authenticateFacebookUser(accessToken: String) {
+        UdacityClient.sharedInstance().authenticateFacebookUser(accessToken: accessToken) { (success, errorMessage) in
+            if success {
+                UdacityClient.sharedInstance().faceBookUser = true
+                self.completeLogin()
+            } else {
+                self.performUIUpdatesOnMain {
+                    self.showInfoAlert(theTitle: "Login falhou", theMessage: "Tente com outras credenciais.")
+                }
+            }
+            self.performUIUpdatesOnMain {
+                self.activityIndicator.stopAnimating()
+                self.enableUIControls(true)
+            }
+            
+        }
+        
+    }
     // MARK: Call UIViewController Extension to lock UI Itens
     private func enableUIControls(_ enable: Bool){
         self.enableUIItens(views: emailTextField,passwordTextField,loginButton,signUpButton, enable:enable)
@@ -104,5 +125,34 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
          self.present(navigationManagerController, animated: true, completion: nil)
          */
     }
+    
+    // MARK: - Facebook Methods
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error != nil {
+            self.showInfoAlert(theTitle: "Erro" ,theMessage: error.localizedDescription)
+        } else if result.isCancelled{
+            self.showInfoAlert(theTitle: "Erro" ,theMessage: "Usuário cancelou o Login.")
+        }else{
+            // success
+            let ctoken = FBSDKAccessToken.current()
+            self.authenticateFacebookUser(accessToken: (ctoken?.tokenString)!)
+            
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("User logged out of facebook")
+    }
+    
+    
+    private func setupFacebookLoginButton(){
+        let btnFBLogin = FBSDKLoginButton()
+        btnFBLogin.readPermissions = ["public_profile","email"]
+        btnFBLogin.delegate = self
+        btnFBLogin.center = self.view.center
+        self.view.addSubview(btnFBLogin)
+    }
+    
     
 }

@@ -8,6 +8,8 @@
 
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class BaseTabViewController : UITabBarController {
     
@@ -55,6 +57,12 @@ class BaseTabViewController : UITabBarController {
     ///
     /// - Parameter sender: the Logout button
     @IBAction func logout(_ sender: Any){
+        if UdacityClient.sharedInstance().faceBookUser {
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut() // this is an instance function
+            UdacityClient.sharedInstance().faceBookUser = false
+        }
+        
         UdacityClient.sharedInstance().logout(){ (success,error) in
             if success {
                 self.dismiss(animated: true, completion: nil)
@@ -62,13 +70,12 @@ class BaseTabViewController : UITabBarController {
                 self.showInfoAlert(theTitle: "Erro" , theMessage: error!.localizedDescription)
             }
             
-            
         }
     }
     
     @IBAction func postLocationButtonPressed(_ sender: Any){
         self.enableUIControls(false)
-
+        
         if ParseClient.sharedInstance().locationIdPosted  {
             let confirmMsg = "Você já informou sua localização anteriormente. Deseja atualizar sua nova localização?"
             self.showConfirmationAlert(withMessage: confirmMsg, actionTitle: "Reescrever", action: {
@@ -78,17 +85,9 @@ class BaseTabViewController : UITabBarController {
             self.showPostingView()
             
         }
-//        if ParseClient.sharedInstance().currentRegisteredLocation.objectID != nil {
-//            let confirmMsg = "Você já informou sua localização anteriormente. Deseja atualizar sua nova localização?"
-//            self.showConfirmationAlert(withMessage: confirmMsg, actionTitle: "Reescrever", action: {
-//                self.showPostingView()
-//            })
-//        } else {
-//            self.showPostingView()
-//        }
         
         self.enableUIControls(true)
-    
+        
     }
     
     //MARK: - Segues
@@ -97,9 +96,10 @@ class BaseTabViewController : UITabBarController {
         let viewController = storyboard?.instantiateViewController(withIdentifier: "PostLocationView") as! PostViewController
         navigationController?.pushViewController(viewController, animated: true)
     }
-   
+    
     
     // MARK: - Helpers
+    
     private func enableUIControls(_ enable: Bool) {
         performUIUpdatesOnMain {
             self.postLocationButton.isEnabled = enable
@@ -108,12 +108,7 @@ class BaseTabViewController : UITabBarController {
         }
     }
     
-    // This segue is configured at the Map Storyboard
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // alert appears after the segue happens
-//        if segue.identifier == "addLocation"{
-//            self.showInfoAlert(theMessage: "Going to segue add Location")
-//        }
-//    }
+  
+
 }
 

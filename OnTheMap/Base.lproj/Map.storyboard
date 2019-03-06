@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -248,7 +247,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8mB-b8-o3t">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tes-l8-cdA">
                                 <rect key="frame" x="30" y="532" width="315" height="30"/>
@@ -272,11 +271,11 @@
                         <constraints>
                             <constraint firstItem="OXd-L9-UFg" firstAttribute="trailing" secondItem="tes-l8-cdA" secondAttribute="trailing" constant="30" id="2xW-aA-0HH"/>
                             <constraint firstItem="r3V-lJ-awn" firstAttribute="centerX" secondItem="OXd-L9-UFg" secondAttribute="centerX" id="8Wg-J4-XIS"/>
-                            <constraint firstItem="8mB-b8-o3t" firstAttribute="leading" secondItem="PmP-ed-Nzq" secondAttribute="leadingMargin" id="CGJ-jU-pE3"/>
+                            <constraint firstItem="8mB-b8-o3t" firstAttribute="leading" secondItem="OXd-L9-UFg" secondAttribute="leading" id="CGJ-jU-pE3"/>
                             <constraint firstItem="tes-l8-cdA" firstAttribute="leading" secondItem="OXd-L9-UFg" secondAttribute="leading" constant="30" id="Olg-ou-UsR"/>
                             <constraint firstItem="OXd-L9-UFg" firstAttribute="bottom" secondItem="tes-l8-cdA" secondAttribute="bottom" constant="105" id="YpL-cJ-kQV"/>
-                            <constraint firstItem="8mB-b8-o3t" firstAttribute="trailing" secondItem="PmP-ed-Nzq" secondAttribute="trailingMargin" id="Zcl-5M-1ui"/>
-                            <constraint firstItem="OXd-L9-UFg" firstAttribute="bottom" secondItem="8mB-b8-o3t" secondAttribute="bottom" id="auC-gi-VeD"/>
+                            <constraint firstItem="8mB-b8-o3t" firstAttribute="trailing" secondItem="OXd-L9-UFg" secondAttribute="trailing" id="Zcl-5M-1ui"/>
+                            <constraint firstAttribute="bottom" secondItem="8mB-b8-o3t" secondAttribute="bottom" id="auC-gi-VeD"/>
                             <constraint firstItem="8mB-b8-o3t" firstAttribute="top" secondItem="OXd-L9-UFg" secondAttribute="top" id="dGZ-la-lwe"/>
                             <constraint firstItem="r3V-lJ-awn" firstAttribute="centerY" secondItem="OXd-L9-UFg" secondAttribute="centerY" id="jNd-DW-ewa"/>
                         </constraints>
@@ -290,7 +289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ht-Nm-8Rf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="1279"/>
+            <point key="canvasLocation" x="989.60000000000002" y="1278.7106446776613"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="Pc4-Fu-A8C">

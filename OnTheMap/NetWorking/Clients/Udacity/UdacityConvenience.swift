@@ -136,4 +136,43 @@ extension UdacityClient {
     }
     
     
+    
+    func authenticateFacebookUser(accessToken: String, completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
+        
+        // Build Json body of request
+        let facebookMobile = FacebookMobile(accessToken: accessToken)
+        let postData = FaceBookUser(facebookMobile: facebookMobile)
+        let encoder = JSONEncoder()
+        let jsonBody = try! encoder.encode(postData)
+        let jsonData = String(data:jsonBody, encoding: .utf8)!
+        let urlPath = UdacityClient.UdacityMethods.Authentication
+        
+        _ = HTTPCLient.shared().taskForPostOrPutMethod(
+            url:urlPath,
+            jsonBody:jsonData,
+            parameters: [:],
+            apiType: HTTPCLient.APIType.udacity,
+            completionHandlerForPost: { (data, error) in
+                if let error = error {
+                    print(error)
+                    completionHandlerForAuth(false, error.localizedDescription)
+                } else {
+                    
+                    do {
+                        let userSession = try UserSession(data: data!)
+                        if !userSession.account.registered {
+                            completionHandlerForAuth(false, "Login falhou, usuário não registrado.")
+                        }else {
+                            self.userSession = userSession
+                            completionHandlerForAuth(true, nil)
+                        }
+                    }
+                    catch {
+                        // what kind of error can happen here ?
+                        print("Não foi possível encontrar os dados de Usuário.")
+                        completionHandlerForAuth(false, error.localizedDescription)
+                    }
+                }
+        })
+    }
 }
