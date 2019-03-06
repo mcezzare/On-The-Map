@@ -23,6 +23,7 @@
 		252EA7BC221398B10027D01F /* UdacityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7BB221398B10027D01F /* UdacityConvenience.swift */; };
 		252EA7BE2213BB6C0027D01F /* UdacityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7BD2213BB6C0027D01F /* UdacityRequest.swift */; };
 		252EA7C02213C1C20027D01F /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EA7BF2213C1C20027D01F /* UserSession.swift */; };
+		258ECEFD222F82400099D70B /* FaceBookUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258ECEFC222F82400099D70B /* FaceBookUser.swift */; };
 		259D23F522189D4B00544CE2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D23F422189D4B00544CE2 /* Constants.swift */; };
 		259D23FC2218A34900544CE2 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 259D23FA2218A34900544CE2 /* Map.storyboard */; };
 		259D23FE2218A46700544CE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259D23FD2218A46700544CE2 /* MapViewController.swift */; };
@@ -77,6 +78,7 @@
 		252EA7BB221398B10027D01F /* UdacityConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityConvenience.swift; sourceTree = "<group>"; };
 		252EA7BD2213BB6C0027D01F /* UdacityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityRequest.swift; sourceTree = "<group>"; };
 		252EA7BF2213C1C20027D01F /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		258ECEFC222F82400099D70B /* FaceBookUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceBookUser.swift; sourceTree = "<group>"; };
 		259D23F422189D4B00544CE2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		259D23FB2218A34900544CE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Map.storyboard; sourceTree = "<group>"; };
 		259D23FD2218A46700544CE2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				252EA7B72212707E0027D01F /* UdacityUser.swift */,
 				252EA7BD2213BB6C0027D01F /* UdacityRequest.swift */,
 				252EA7BF2213C1C20027D01F /* UserSession.swift */,
+				258ECEFC222F82400099D70B /* FaceBookUser.swift */,
 			);
 			path = Udacity;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				25F8FEE2220BC392007BB3B2 /* ViewController.swift in Sources */,
 				252EA7B322126ED90027D01F /* UdacityClient.swift in Sources */,
 				2526D64B2221F14800E4177C /* StudentInformation.swift in Sources */,
+				258ECEFD222F82400099D70B /* FaceBookUser.swift in Sources */,
 				2526D64F22233B9600E4177C /* StudentsLocation.swift in Sources */,
 				259D23F522189D4B00544CE2 /* Constants.swift in Sources */,
 				259D24022218A54700544CE2 /* PostViewController.swift in Sources */,

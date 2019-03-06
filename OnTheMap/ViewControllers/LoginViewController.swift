@@ -10,7 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController,UITextFieldDelegate {
+class LoginViewController: UIViewController,UITextFieldDelegate,FBSDKLoginButtonDelegate {
     
     // MARK: Outlets
     
@@ -19,7 +19,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var facebookLoginButton: UIButton!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -27,10 +26,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         loginButton.makeRoundedCorners()
         signUpButton.makeRoundedCorners()
-//        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
-//        loginButton.center = view.center
-//
-//        view.addSubview(loginButton)
+        setupFacebookLoginButton()
     }
     
     // MARK: Actions
@@ -80,6 +76,24 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    private func authenticateFacebookUser(accessToken: String) {
+        UdacityClient.sharedInstance().authenticateFacebookUser(accessToken: accessToken) { (success, errorMessage) in
+            if success {
+                UdacityClient.sharedInstance().faceBookUser = true
+                self.completeLogin()
+            } else {
+                self.performUIUpdatesOnMain {
+                    self.showInfoAlert(theTitle: "Login falhou", theMessage: "Tente com outras credenciais.")
+                }
+            }
+            self.performUIUpdatesOnMain {
+                self.activityIndicator.stopAnimating()
+                self.enableUIControls(true)
+            }
+            
+        }
+        
+    }
     // MARK: Call UIViewController Extension to lock UI Itens
     private func enableUIControls(_ enable: Bool){
         self.enableUIItens(views: emailTextField,passwordTextField,loginButton,signUpButton, enable:enable)
@@ -114,46 +128,31 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     // MARK: - Facebook Methods
     
-    @IBAction func signInWithFacebook(sender: AnyObject) {
-        if (FBSDKAccessToken.current() != nil) {
-            //user has already a token
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error != nil {
+            self.showInfoAlert(theTitle: "Erro" ,theMessage: error.localizedDescription)
+        } else if result.isCancelled{
+            self.showInfoAlert(theTitle: "Erro" ,theMessage: "Usuário cancelou o Login.")
+        }else{
+            // success
             let ctoken = FBSDKAccessToken.current()
-            loginWithFacebook(accessToken: ctoken?.tokenString)
-        } else {
-            let facebookmanager = FBSDKLoginManager()
-                facebookmanager.logIn(withReadPermissions: ["email"], handler: { (loginResult: FBSDKLoginManagerLoginResult!, error) -> Void in
-                if let _ = error {
-                    print("login with facebook failed")
-                }else {
-                    let accesstokenobject = loginResult.token
-                    let tokenString  = accesstokenobject?.tokenString
-                    print("token string is \(tokenString!)")
-                    self.loginWithFacebook(accessToken: tokenString)
-                }
-            })
+            self.authenticateFacebookUser(accessToken: (ctoken?.tokenString)!)
+            
         }
     }
     
-    func loginWithFacebook(accessToken: String!) {
-
-//        client.loginWithFacebook(accessToken, completionHandler: { (success, sessionID, errorString) -> Void in
-//            if let err = errorString {
-//                print("erroris \(err.localizedDescription)\n")
-//                MOHUD.showWithError(err.localizedDescription)
-//            } else {
-//                if (sessionID != nil) {
-//                    // go to tabController
-//                    OTMUdacityClient.sharedInstance().sessionID = sessionID
-//                    self.presentTheLocationsViewController()
-//                    print("session id is \(sessionID)")
-//
-//                }else {
-//                    print("errorloginface \(errorString?.localizedDescription)")
-//
-//                }
-//            }
-//
-//        })
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("User logged out of facebook")
     }
+    
+    
+    private func setupFacebookLoginButton(){
+        let btnFBLogin = FBSDKLoginButton()
+        btnFBLogin.readPermissions = ["public_profile","email"]
+        btnFBLogin.delegate = self
+        btnFBLogin.center = self.view.center
+        self.view.addSubview(btnFBLogin)
+    }
+    
     
 }
