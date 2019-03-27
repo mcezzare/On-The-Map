@@ -1,6 +1,6 @@
-# On The Map
+# OnTheMap
 
-3º project from the Udacity nanodegree course.
+OnTheMap is the third project from the **Udacity's iOS Developer Nanodegree course** `(nd003)`.
 
 The OnTheMap application allows Udacity students to share their location and a URL with other students.
 
@@ -10,13 +10,31 @@ First, the user logs in to the app using their Udacity username and password or 
 
 After login, the app downloads locations and links previously posted by other students. These links can point to any URL that a student shares. After viewing the information posted by other students, a user can post their own location and link. The locations are specified with a string and forward geocoded. They can be as specific as a full street address or as generic as "Brazil, São Paulo Atibaia"
 
+Bonus :
+
+1. Login with facebook OAuth2.
+
+ Note: The Logout button when is logged in with facebook, destroy both sessions: **FB** and **Udacity**.
+
+2. The pin in MapView has a popup with Text and icon Link to open in Safari.
+
+## Implementation
+
+The application has three scenes of the view controller:
+
+- Login View: Allows the user to log in using their Udacityou credentials (and such as an additional credit exercise using their Facebook account).
+- View with Map and Table Tabs: Allows users to view the locations of other students in two formats: MapView with pins and Table View with a list.
+- View information view: Allows users to specify their own locations and links.
+
+
+
 ## Running Project
 
-Clone the project
+### Clone the project
 
-* Note. Dependencies are only used to logging with Facebook. All sections use native functions of Swift 4.
+- Note. Dependencies are only used to logging with Facebook. All sections use native functions of Swift 4.
 
-Install dependencies
+### Install dependencies
 
 ```sh
 pod install
@@ -99,10 +117,50 @@ gem install cocoapods
 
 ## Requirements
 
-* A valid and active Udacity Account
-* Xcode 9.2
+- A valid and active Udacity Account
+- Xcode 9.2
+- Tools (`cocoapods`) described in [required tools](#required-tools)
 
 ### Background Services
 
-* Udacity API: for login and get Student Information
-* Parse Server: for keep the location of Users
+- Udacity API: for login and get Student Information
+- Parse Server: for keep the location of Users
+
+**Note**:
+
+During the course, I had several problems using the Parse service, from slow to unavailability.
+
+Aside from that the user data also returns randomly, and never the user that logs has the id of the user who posts it, which is very strange when using the application 😞.
+
+I chose to configure a local service (docker) to finalize the application, as soon as possible, I 'll provide a repository with the script to build the images and loads the necessary data to test the App.
+
+Some **requisites** for this project to be approved:
+
+- The application contains a `StudentInformation` structure with the appropriate properties for locations and links.
+- The struct `StudentInformation` has an init() method that accepts a dictionary as an argument.
+- The network code uses Swift's URLSession library, not a third-party framework.
+- JSON parsing code uses Swift's JSONSerialization library or Codable, not a third-party framework.
+
+## How to Contribute
+
+Find any typos? Have another resource you think should be included? Contributions are welcome!
+
+First, fork this repository. I'll be happy to know if this example is useful for you.
+
+Next, clone this repository to your desktop to make changes.
+
+Once you've pushed changes to your local repository, you can create a pull request with your suggestion.
+
+It's good take a look at the [Contributing Guide](CONTRIBUTING.MD)
+
+## License
+
+The contents of this repository are covered under the [MIT License](LICENSE.txt).
+
+## Other Resources
+
+Assets : The assets package was provided from Udacity Team
+
+List and Grid icons from [Iconfinder](https://www.iconfinder.com)
+
+The app store icons generated with this great tool: [Makeappicon](https://makeappicon.com/)
