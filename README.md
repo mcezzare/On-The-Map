@@ -12,7 +12,7 @@
   * [How to Contribute](#how-to-contribute)
   * [License](#license)
   * [Other Resources](#other-resources)
-  
+
 OnTheMap is the third project from the **Udacity's iOS Developer Nanodegree course** `(nd003)`.
 
 The OnTheMap application allows Udacity students to share their location and a URL with other students.
@@ -70,6 +70,7 @@ After taps the `Finalizar` button, App `UIAlertController` successfully notifies
 ![TableViewController](repository-media/07-TableViewController-with-user-data.png)
 
 User taps the `maps` button on tab bar(bottom) and can see the location posted in Map View.
+
 ![MapViewController](repository-media/08-MapViewController-with-user-data.png)
 
 After user taps on red pin, and then taps the `!` icon on popup detail, the url informed on `PostViewController` loads into Safari.
@@ -88,6 +89,7 @@ After user fill a new location, can preview it on map in `PinViewController`, ta
 
 ![TableViewController](repository-media/12-TableViewController-with-updated-user-data.png)
 
+- - -
 Above there is the 4 steps using logging with Facebook:
 
 User taps the `continuar com o facebook`, APP asks permission to start the login process.
@@ -107,6 +109,7 @@ Facebook Udacity app validate your credentials and `LoginViewController` takes t
 ![LoginViewController](repository-media/16-LoginViewController-using-fb-auth-step-4.png)
 
 User taps the `sign in` button on `LoginViewController`.
+
 ![Safari](repository-media/17-Safari-with-sign-up-button-tapped-in-loginview.png)
 
 ## Running Project
